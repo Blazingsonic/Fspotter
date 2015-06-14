@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Waldstueck in Furtwangen"
+        android:text="Waldstück in Furtwangen"
         android:id="@+id/locationNameLabel"
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
