@@ -10,5 +10,6 @@
         <item>Nach Sternen sortieren</item>
         <item>Nach Entfernung sortieren</item>
     </string-array>
+    <string name="title_activity_location_detail">LocationDetailActivity</string>
 
 </resources>

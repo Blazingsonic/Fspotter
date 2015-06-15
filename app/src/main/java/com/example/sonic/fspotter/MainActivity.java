@@ -1,5 +1,6 @@
 package com.example.sonic.fspotter;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -39,11 +41,12 @@ public class MainActivity extends FragmentActivity {
     private String mCouchUrl = "https://gowdy.iriscouch.com/gowdy/_design/gowdy/_view/alleKneipen";
     public static FragmentManager fragmentManager;
 
-    private ArrayList<Kneipe> mKneipen = null;
-    private ArrayList<Kneipe> mKneipenFiltered = null;
+    public static ArrayList<Kneipe> mKneipen = null;
+    public static ArrayList<Kneipe> mKneipenFiltered = null;
 
     @InjectView(R.id.spinnerView) Spinner mSpinner;
     @InjectView(R.id.spinnerView2) Spinner mSpinner2;
+    @InjectView(R.id.viewPager) ViewPager pager;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,15 +54,36 @@ public class MainActivity extends FragmentActivity {
         ButterKnife.inject(this);
 
         fragmentManager = getSupportFragmentManager();
-        ViewPager pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
 
-        //Bind the title indicator to the adapter
-        TitlePageIndicator titleIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
-        titleIndicator.setViewPager(pager);
+        // Give the PagerSlidingTabStrip the ViewPager
+        PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        // Attach the view pager to the tab strip
+        tabsStrip.setViewPager(pager);
 
         setKneipenData();
 
+        tabsStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Fragment fragment = ((MyPagerAdapter)pager.getAdapter()).getFragment(position);
+
+                if (position == 2 && fragment != null) {
+                    fragment.onResume();
+                    Log.v(TAG, "hier gehts ab");
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -80,7 +104,10 @@ public class MainActivity extends FragmentActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Filter
                 if (position != 0) {
-                    //updateKneipenData("spinner2", position);
+                    updateKneipenData("spinner2", position);
+                    pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+                    PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+                    tabsStrip.setViewPager(pager);
                 }
             }
 
@@ -140,10 +167,6 @@ public class MainActivity extends FragmentActivity {
                         kneipen.add(kneipe);
                         Log.v(TAG, kneipen.toString());
 
-                        if (kneipen != null) {
-                            //updateDisplay(kneipen);
-                        }
-
                         mKneipen = kneipen;
                         Log.v(TAG + " mKneipen", mKneipen.toString());
                     }
@@ -154,22 +177,55 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
-    /*private void updateDisplay(final ArrayList<Kneipe> kneipen) {
-        Log.i(TAG, kneipen.toString());
+    private void updateKneipenData(String caller, int position) {
+        mKneipenFiltered = new ArrayList<Kneipe>();
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mRecyclerView.setHasFixedSize(true); // Not always recommended, but in this case enhances performance
-
-                mLayoutManager = new LinearLayoutManager(MainActivity.this);
-                mRecyclerView.setLayoutManager(mLayoutManager);
-
-                final Kneipenadapter mAdapter = new Kneipenadapter(kneipen, MainActivity.this);
-                mRecyclerView.setAdapter(mAdapter);
-            }
-        });
-    }*/
+        switch (position) {
+            case 0:
+                mKneipenFiltered = mKneipen;
+                break;
+            case 1:
+                for (int i = 0; i < mKneipen.size(); i++) {
+                    if (mKneipen.get(i).getBewertung().equals("5")) {
+                        Log.i(TAG, "This is 5 stars");
+                        mKneipenFiltered.add(mKneipen.get(i));
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; i < mKneipen.size(); i++) {
+                    if (mKneipen.get(i).getBewertung().equals("4")) {
+                        Log.i(TAG, "This is 4 stars");
+                        mKneipenFiltered.add(mKneipen.get(i));
+                    }
+                }
+                break;
+            case 3:
+                for (int i = 0; i < mKneipen.size(); i++) {
+                    if (mKneipen.get(i).getBewertung().equals("3")) {
+                        Log.i(TAG, "This is 3 stars");
+                        mKneipenFiltered.add(mKneipen.get(i));
+                    }
+                }
+                break;
+            case 4:
+                for (int i = 0; i < mKneipen.size(); i++) {
+                    if (mKneipen.get(i).getBewertung().equals("2")) {
+                        Log.i(TAG, "This is 2 stars");
+                        mKneipenFiltered.add(mKneipen.get(i));
+                    }
+                }
+                break;
+            case 5:
+                for (int i = 0; i < mKneipen.size(); i++) {
+                    if (mKneipen.get(i).getBewertung().equals("1")) {
+                        Log.i(TAG, "This is 1 star");
+                        mKneipenFiltered.add(mKneipen.get(i));
+                    }
+                }
+                break;
+        }
+    }
 
     private Kneipe makeKneipe(String name, String adresse, String typ, String bewertung) {
         Kneipe kneipe = new Kneipe();
@@ -207,10 +263,6 @@ public class MainActivity extends FragmentActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner2.setAdapter(adapter);
     }
-
-
-
-
 
 
     @Override

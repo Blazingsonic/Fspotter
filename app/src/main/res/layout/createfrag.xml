@@ -6,24 +6,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create"
-        android:id="@+id/createHeading"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textIsSelectable="true"
-        android:textSize="18dp"
-        android:layout_marginBottom="@dimen/heading_margin_bottom" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Name"
         android:id="@+id/locationNameLabel"
-        android:layout_below="@+id/createHeading"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="@dimen/label_margin_bottom"
-        android:textSize="@dimen/label_text_size" />
+        android:textSize="@dimen/label_text_size"
+        android:layout_alignParentTop="true" />
 
     <EditText
         android:layout_width="match_parent"

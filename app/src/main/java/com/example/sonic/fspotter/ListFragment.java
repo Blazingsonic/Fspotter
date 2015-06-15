@@ -24,9 +24,11 @@ public class ListFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
 
-    private String mParam1;
-    private String mParam2;
+    private String mfragmentName;
+    private String mInstantiationCount;
+    private int mPageNumber;
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,12 +37,13 @@ public class ListFragment extends Fragment {
     public ListFragment() {
     }
 
-    public static ListFragment newInstance(String param1, String param2) {
+    public static ListFragment newInstance(String fragmentName, String instantiationCount, int pageNumber) {
 
         ListFragment fragment = new ListFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(ARG_PARAM1, param1);
-        bundle.putString(ARG_PARAM2, param2);
+        bundle.putString(ARG_PARAM1, fragmentName);
+        bundle.putString(ARG_PARAM2, instantiationCount);
+        bundle.putInt(ARG_PARAM3, pageNumber);
 
         fragment.setArguments(bundle);
 
@@ -61,8 +64,9 @@ public class ListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mfragmentName = getArguments().getString(ARG_PARAM1);
+            mInstantiationCount = getArguments().getString(ARG_PARAM2);
+            mPageNumber = getArguments().getInt(ARG_PARAM3);
         }
     }
 
@@ -72,13 +76,20 @@ public class ListFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-                "Jupiter", "Saturn", "Uranus", "Neptune"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll(Arrays.asList(planets));
+        if (MainActivity.mKneipenFiltered != null) {
+            ArrayList<Kneipe> kneipen = MainActivity.mKneipenFiltered;
+            Log.v(TAG, "hier ist das Fragment onViewCreated" + kneipen.toString());
 
-        ListAdapter mAdapter = new ListAdapter(planetList, getActivity());
-        mRecyclerView.setAdapter(mAdapter);
+            updateDisplay(kneipen);
+        }
+        else if (MainActivity.mKneipen != null) {
+            ArrayList<Kneipe> kneipen = MainActivity.mKneipen;
+            Log.v(TAG, "hier ist das Fragment onResume" + kneipen.toString());
+
+            if (kneipen != null) {
+                updateDisplay(kneipen);
+            }
+        }
 
         super.onViewCreated(view, savedInstanceState);
     }
@@ -91,6 +102,35 @@ public class ListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        if (MainActivity.mKneipenFiltered != null) {
+            ArrayList<Kneipe> kneipen = MainActivity.mKneipenFiltered;
+            Log.v(TAG, "hier ist das Fragment onResume" + kneipen.toString());
+
+            updateDisplay(kneipen);
+        }
+        else if (MainActivity.mKneipen != null) {
+            ArrayList<Kneipe> kneipen = MainActivity.mKneipen;
+            Log.v(TAG, "hier ist das Fragment onResume" + kneipen.toString());
+
+            if (kneipen != null) {
+                updateDisplay(kneipen);
+            }
+        }
+    }
+
+    private void updateDisplay(final ArrayList<Kneipe> kneipen) {
+        Log.i(TAG, kneipen.toString());
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mRecyclerView.setHasFixedSize(true); // Not always recommended, but in this case enhances performance
+
+                ListAdapter mAdapter = new ListAdapter(kneipen, getActivity());
+                mRecyclerView.setAdapter(mAdapter);
+            }
+        });
     }
 
 }

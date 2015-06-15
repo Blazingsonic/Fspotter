@@ -1,6 +1,7 @@
 package com.example.sonic.fspotter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,10 +16,10 @@ import java.util.List;
  */
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
-    private List<String> mLocations;
+    private List<Kneipe> mLocations;
     private Context mContext;
 
-    public ListAdapter(List<String> locations, Context context) {
+    public ListAdapter(List<Kneipe> locations, Context context) {
         mLocations = locations;
         mContext = context;
     }
@@ -28,8 +29,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         public TextView mLocationLabel;
         public IMyViewHolderClicks mListener;
 
+        public TextView mName;
+        public TextView mAdresse;
+        public TextView mTyp;
+        public TextView mBewertung;
+
         public ViewHolder(View itemView, IMyViewHolderClicks listener) {
             super(itemView);
+
+            mName = (TextView) itemView.findViewById(R.id.locationNameLabel);
+
+            mListener = listener;
 
             mListener = listener;
             //mLocationLabel =
@@ -55,6 +65,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // Assign values to the views
+        holder.mName.setText(mLocations.get(position).getName());
     }
 
     @Override
@@ -64,7 +75,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         ViewHolder holder = new ViewHolder(view, new ListAdapter.ViewHolder.IMyViewHolderClicks() {
 
             public void onPotato(View caller, int position) {
-                Log.i("Klick", mLocations.get(position));
+                // Start new intent
+                Intent intent = new Intent(mContext, LocationDetailActivity.class);
+                intent.putExtra("Name", mLocations.get(position).getName());
+                mContext.startActivity(intent);
             }
         });
 
