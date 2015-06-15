@@ -11,6 +11,9 @@ import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity {
 
+
+    //kjncknjfe
+    
     public static final String TAG = MainActivity.class.getSimpleName();
 
     public static FragmentManager fragmentManager;
