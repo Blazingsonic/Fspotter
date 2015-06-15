@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="@dimen/general_padding">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:id="@+id/createHeading"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textIsSelectable="true"
+        android:textSize="18dp"
+        android:layout_marginBottom="@dimen/heading_margin_bottom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:id="@+id/locationLabel"
+        android:layout_below="@+id/createHeading"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="@dimen/label_margin_bottom"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/locationInputText"
+        android:background="@color/grey_middle"
+        android:clickable="true"
+        android:layout_marginBottom="@dimen/input_margin_bottom"
+        android:layout_below="@+id/locationLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/descriptionLabel"
+        android:layout_below="@+id/locationInputText"
+        android:layout_marginBottom="@dimen/label_margin_bottom"
+        android:text="Beschreibung"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/descriptionInputText"
+        android:layout_below="@+id/descriptionLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/input_margin_bottom"
+        android:background="@color/grey_middle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hinweise"
+        android:id="@+id/hintsLabel"
+        android:layout_below="@+id/descriptionInputText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="@dimen/label_text_size"
+        android:layout_marginBottom="@dimen/label_margin_bottom" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/hintsInputText"
+        android:layout_below="@+id/hintsLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/grey_middle"
+        android:layout_marginBottom="@dimen/input_margin_bottom" />
+
+</RelativeLayout>

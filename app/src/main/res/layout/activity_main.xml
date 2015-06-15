@@ -15,7 +15,8 @@
         android:singleLine="true"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:background="#D3352C" />
+        android:background="@color/red_general"
+        android:clickable="true" />
 
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"

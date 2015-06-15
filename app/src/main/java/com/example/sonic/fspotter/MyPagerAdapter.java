@@ -17,8 +17,8 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0: return MapFragment.newInstance("MapFragment", "Instance 1");
-            //case 1: return PhotoFragment.newInstance("PhotoFragment", "Instance 1");
-            case 1: return ListFragment.newInstance("ListFragment", "Instance 1");
+            case 1: return CreateFragment.newInstance("CreateFragment", "Instance 1");
+            case 2: return ListFragment.newInstance("ListFragment", "Instance 1");
             default: return ListFragment.newInstance("ListFragment", "Instance Default");
         }
     }
