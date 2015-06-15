@@ -10,10 +10,6 @@ import android.view.MenuItem;
 
 
 public class MainActivity extends FragmentActivity {
-
-    // jbkbfkfkef
-    //kjncknjfe
-    //Hallo
     
     public static final String TAG = MainActivity.class.getSimpleName();
 
