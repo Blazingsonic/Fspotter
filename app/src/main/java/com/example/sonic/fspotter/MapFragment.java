@@ -90,7 +90,7 @@ public class MapFragment extends Fragment {
 
         // Changing marker icon
         marker.icon(BitmapDescriptorFactory
-                .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
 
         // adding marker
         googleMap.addMarker(marker);
