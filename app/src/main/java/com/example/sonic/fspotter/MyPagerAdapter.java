@@ -4,10 +4,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.viewpagerindicator.IconPagerAdapter;
+
 /**
  * Created by sonic on 14.06.15.
  */
-public class MyPagerAdapter extends FragmentPagerAdapter {
+public class MyPagerAdapter extends FragmentPagerAdapter implements IconPagerAdapter {
 
     public MyPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -24,7 +26,29 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public int getIconResId(int i) {
+        return 0;
+    }
+
+    @Override
     public int getCount() {
-        return 2;
+        return 3;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        String title = "";
+        switch(position){
+            case 0:
+                title = "Map";
+                break;
+            case 1:
+                title = "Create";
+                break;
+            case 2:
+                title = "List";
+                break;
+        }
+        return title;
     }
 }

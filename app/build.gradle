@@ -27,4 +27,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'fr.avianey.com.viewpagerindicator:library:2.4.1@aar'
 }

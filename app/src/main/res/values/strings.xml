@@ -3,5 +3,12 @@
     <string name="app_name">Fspotter</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="stern_prompt">Choose a ranking</string>
+
+    <string-array name="sterne_array">
+        <item>Kategorie zum Sortieren auswählen</item>
+        <item>Nach Sternen sortieren</item>
+        <item>Nach Entfernung sortieren</item>
+    </string-array>
 
 </resources>

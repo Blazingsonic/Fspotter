@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
-        android:id="@+id/locationLabel"
+        android:id="@+id/locationNameLabel"
         android:layout_below="@+id/createHeading"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -28,17 +28,17 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:id="@+id/locationInputText"
+        android:id="@+id/locationNameInputText"
         android:background="@color/grey_middle"
         android:clickable="true"
         android:layout_marginBottom="@dimen/input_margin_bottom"
-        android:layout_below="@+id/locationLabel" />
+        android:layout_below="@+id/locationNameLabel" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/descriptionLabel"
-        android:layout_below="@+id/locationInputText"
+        android:layout_below="@+id/locationNameInputText"
         android:layout_marginBottom="@dimen/label_margin_bottom"
         android:text="Beschreibung"
         android:textSize="@dimen/label_text_size" />
