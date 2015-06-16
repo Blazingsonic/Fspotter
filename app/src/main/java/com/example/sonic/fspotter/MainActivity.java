@@ -74,7 +74,7 @@ public class MainActivity extends FragmentActivity {
                 Fragment fragment = ((MyPagerAdapter)pager.getAdapter()).getFragment(position);
 
                 if (position == 2 && fragment != null) {
-                    fragment.onResume();
+                    //fragment.onResume();
                     Log.v(TAG, "hier gehts ab");
                 }
             }

@@ -79,11 +79,19 @@ public class ListFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        if (MainActivity.mKneipenFiltered != null && mKneipenFilteredListFragment == null) {
-            mKneipenFilteredListFragment = MainActivity.mKneipenFiltered;
-            Log.v(TAG, "hier ist das Fragment onViewCreated" + mKneipenFilteredListFragment.toString());
+        if (MainActivity.mKneipenFiltered != null) {
+            ArrayList<Kneipe> kneipen = MainActivity.mKneipenFiltered;
+            Log.v(TAG, "hier ist das Fragment onViewCreated" + kneipen.toString());
 
-            updateDisplay(mKneipenFilteredListFragment);
+            updateDisplay(kneipen);
+        }
+        else if (MainActivity.mKneipen != null) {
+            ArrayList<Kneipe> kneipen = MainActivity.mKneipen;
+            Log.v(TAG, "hier ist das Fragment onResume" + kneipen.toString());
+
+            if (kneipen != null) {
+                updateDisplay(kneipen);
+            }
         }
 
         super.onViewCreated(view, savedInstanceState);
@@ -98,15 +106,19 @@ public class ListFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if (mKneipenListFragment != null) {
-            Log.v(TAG, "hier ist das Fragment onResume" + mKneipenListFragment.toString());
+        if (MainActivity.mKneipenFiltered != null) {
+            ArrayList<Kneipe> kneipen = MainActivity.mKneipenFiltered;
+            Log.v(TAG, "hier ist das Fragment onResume" + kneipen.toString());
+
+            updateDisplay(kneipen);
         }
+        else if (MainActivity.mKneipen != null) {
+            ArrayList<Kneipe> kneipen = MainActivity.mKneipen;
+            Log.v(TAG, "hier ist das Fragment onResume" + kneipen.toString());
 
-        if (MainActivity.mKneipen != null && mKneipenListFragment == null) {
-            mKneipenListFragment = MainActivity.mKneipen;
-            Log.v(TAG, "hier ist das Fragment onResume" + mKneipenListFragment.toString());
-
-            updateDisplay(mKneipenListFragment);
+            if (kneipen != null) {
+                updateDisplay(kneipen);
+            }
         }
     }
 

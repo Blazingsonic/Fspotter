@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class SettingsFragment extends Fragment {
 
-    public static final String TAG = ListFragment.class.getSimpleName();
+    public static final String TAG = SettingsFragment.class.getSimpleName();
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -35,9 +35,9 @@ public class SettingsFragment extends Fragment {
     public SettingsFragment() {
     }
 
-    public static ListFragment newInstance(String fragmentName, String instantiationCount, int pageNumber) {
+    public static SettingsFragment newInstance(String fragmentName, String instantiationCount, int pageNumber) {
 
-        ListFragment fragment = new ListFragment();
+        SettingsFragment fragment = new SettingsFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ARG_PARAM1, fragmentName);
         bundle.putString(ARG_PARAM2, instantiationCount);
@@ -49,12 +49,8 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.listfrag, container, false);
-
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-
-        return rootView;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -70,25 +66,6 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
-
-        if (MainActivity.mKneipenFiltered != null) {
-            ArrayList<Kneipe> kneipen = MainActivity.mKneipenFiltered;
-            Log.v(TAG, "hier ist das Fragment onViewCreated" + kneipen.toString());
-
-            updateDisplay(kneipen);
-        }
-        else if (MainActivity.mKneipen != null) {
-            ArrayList<Kneipe> kneipen = MainActivity.mKneipen;
-            Log.v(TAG, "hier ist das Fragment onResume" + kneipen.toString());
-
-            if (kneipen != null) {
-                updateDisplay(kneipen);
-            }
-        }
-
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -96,39 +73,4 @@ public class SettingsFragment extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (MainActivity.mKneipenFiltered != null) {
-            ArrayList<Kneipe> kneipen = MainActivity.mKneipenFiltered;
-            Log.v(TAG, "hier ist das Fragment onResume" + kneipen.toString());
-
-            updateDisplay(kneipen);
-        }
-        else if (MainActivity.mKneipen != null) {
-            ArrayList<Kneipe> kneipen = MainActivity.mKneipen;
-            Log.v(TAG, "hier ist das Fragment onResume" + kneipen.toString());
-
-            if (kneipen != null) {
-                updateDisplay(kneipen);
-            }
-        }
-    }
-
-    private void updateDisplay(final ArrayList<Kneipe> kneipen) {
-        Log.i(TAG, kneipen.toString());
-
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mRecyclerView.setHasFixedSize(true); // Not always recommended, but in this case enhances performance
-
-                ListAdapter mAdapter = new ListAdapter(kneipen, getActivity());
-                mRecyclerView.setAdapter(mAdapter);
-            }
-        });
-    }
-
 }

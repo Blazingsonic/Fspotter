@@ -3,6 +3,7 @@ package com.example.sonic.fspotter;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -14,7 +15,7 @@ import java.util.Map;
 /**
  * Created by sonic on 14.06.15.
  */
-public class MyPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.IconTabProvider {
+public class MyPagerAdapter extends FragmentStatePagerAdapter implements PagerSlidingTabStrip.IconTabProvider {
 
     private Map<Integer, String> mFragmentsTags;
     private FragmentManager mFragmentManager;
