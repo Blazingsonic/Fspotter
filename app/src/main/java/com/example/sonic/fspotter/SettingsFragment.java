@@ -10,8 +10,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by sonic on 16.06.15.
@@ -32,6 +40,9 @@ public class SettingsFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
 
+    @InjectView(R.id.spinnerView) Spinner mSpinner;
+    @InjectView(R.id.spinnerView2) Spinner mSpinner2;
+
     public SettingsFragment() {
     }
 
@@ -50,7 +61,34 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.settingsfrag, container, false);
+        ButterKnife.inject(this, view);
+
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                loadItemsInSpinner2(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        mSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position != 0) {
+                    ((MainActivity)getActivity()).updateKneipenData("spinner2", position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -72,5 +110,32 @@ public class SettingsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+    public void loadItemsInSpinner2(int position) {
+        ArrayList<String> list = new ArrayList<String>();
+
+        switch (position) {
+            case 0:
+                Log.i(TAG, "Auswählen");
+                list.add("Zuerst Kategorie wählen");
+                break;
+            case 1:
+                Log.i(TAG, "Sterne ausgewählt");
+                list.add("Filter auswählen");
+                list.add("5");
+                list.add("4");
+                list.add("3");
+                list.add("2");
+                list.add("1");
+                break;
+            case 2:
+                Log.i(TAG, "Entfernung ausgewählt");
+                break;
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner2.setAdapter(adapter);
     }
 }

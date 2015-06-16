@@ -17,12 +17,13 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:singleLine="true"
-        android:textSize="26sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:background="@color/red_general"
-        android:clickable="true" />
+        android:clickable="true"
+        android:padding="10dp" />
 
-    <Spinner
+    <!--<Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerView"
@@ -37,7 +38,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinnerView2"
         android:layout_below="@+id/spinnerView"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true" />-->
 
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
@@ -45,7 +46,7 @@
         app:pstsTextAllCaps="true"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_below="@+id/spinnerView2">
+        android:layout_below="@+id/appName">
     </com.astuetz.PagerSlidingTabStrip>
 
     <android.support.v4.view.ViewPager

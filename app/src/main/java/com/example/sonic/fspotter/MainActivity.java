@@ -44,8 +44,6 @@ public class MainActivity extends FragmentActivity {
     public static ArrayList<Kneipe> mKneipen = null;
     public static ArrayList<Kneipe> mKneipenFiltered = null;
 
-    @InjectView(R.id.spinnerView) Spinner mSpinner;
-    @InjectView(R.id.spinnerView2) Spinner mSpinner2;
     @InjectView(R.id.viewPager) ViewPager pager;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,69 +51,8 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        fragmentManager = getSupportFragmentManager();
-        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-
-        // Give the PagerSlidingTabStrip the ViewPager
-        PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        // Attach the view pager to the tab strip
-        tabsStrip.setViewPager(pager);
-
+        createViewPager();
         setKneipenData();
-
-        tabsStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                Fragment fragment = ((MyPagerAdapter)pager.getAdapter()).getFragment(position);
-
-                if (position == 2 && fragment != null) {
-                    //fragment.onResume();
-                    Log.v(TAG, "hier gehts ab");
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.i(TAG, String.format("value=%d", position));
-
-                if (position != 0) {
-                    loadItemsInSpinner2(position);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        mSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Filter
-                if (position != 0) {
-                    updateKneipenData("spinner2", position);
-                    pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-                    PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-                    tabsStrip.setViewPager(pager);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     private void setKneipenData() {
@@ -177,7 +114,7 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
-    private void updateKneipenData(String caller, int position) {
+    public void updateKneipenData(String caller, int position) {
         mKneipenFiltered = new ArrayList<Kneipe>();
 
         switch (position) {
@@ -225,6 +162,39 @@ public class MainActivity extends FragmentActivity {
                 }
                 break;
         }
+        createViewPager();
+    }
+
+    private void createViewPager() {
+        fragmentManager = getSupportFragmentManager();
+        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
+        // Give the PagerSlidingTabStrip the ViewPager
+        PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        // Attach the view pager to the tab strip
+        tabsStrip.setViewPager(pager);
+
+        tabsStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Fragment fragment = ((MyPagerAdapter)pager.getAdapter()).getFragment(position);
+
+                if (position == 2 && fragment != null) {
+                    //fragment.onResume();
+                    Log.v(TAG, "hier gehts ab");
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private Kneipe makeKneipe(String name, String adresse, String typ, String bewertung) {
@@ -235,33 +205,6 @@ public class MainActivity extends FragmentActivity {
         kneipe.setBewertung(bewertung);
 
         return kneipe;
-    }
-
-    public void loadItemsInSpinner2(int position) {
-        ArrayList<String> list = new ArrayList<String>();
-
-        switch (position) {
-            case 0:
-                Log.i(TAG, "Auswählen");
-                list.add("Zuerst Kategorie wählen");
-                break;
-            case 1:
-                Log.i(TAG, "Sterne ausgewählt");
-                list.add("Filter auswählen");
-                list.add("5");
-                list.add("4");
-                list.add("3");
-                list.add("2");
-                list.add("1");
-                break;
-            case 2:
-                Log.i(TAG, "Entfernung ausgewählt");
-                break;
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpinner2.setAdapter(adapter);
     }
 
 

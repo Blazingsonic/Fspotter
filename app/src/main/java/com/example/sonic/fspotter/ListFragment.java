@@ -30,8 +30,8 @@ public class ListFragment extends Fragment {
     private String mInstantiationCount;
     private int mPageNumber;
 
-    public static ArrayList<Kneipe> mKneipenListFragment = null;
-    public static ArrayList<Kneipe> mKneipenFilteredListFragment = null;
+    //public static ArrayList<Kneipe> mKneipenListFragment = null;
+    //public static ArrayList<Kneipe> mKneipenFilteredListFragment = null;
 
     private OnFragmentInteractionListener mListener;
 
