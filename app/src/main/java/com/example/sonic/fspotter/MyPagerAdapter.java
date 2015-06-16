@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.viewpagerindicator.IconPagerAdapter;
 
 import java.util.HashMap;
@@ -13,10 +14,11 @@ import java.util.Map;
 /**
  * Created by sonic on 14.06.15.
  */
-public class MyPagerAdapter extends FragmentPagerAdapter implements IconPagerAdapter {
+public class MyPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.IconTabProvider {
 
     private Map<Integer, String> mFragmentsTags;
     private FragmentManager mFragmentManager;
+    private int tabIcons[] = {R.mipmap.marker, R.mipmap.diaphragm, R.mipmap.list, R.mipmap.settings};
 
     public MyPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -30,21 +32,22 @@ public class MyPagerAdapter extends FragmentPagerAdapter implements IconPagerAda
             case 0: return MapFragment.newInstance("MapFragment", "Instance 1");
             case 1: return CreateFragment.newInstance("CreateFragment", "Instance 1");
             case 2: return ListFragment.newInstance("ListFragment", "Instance 1", 2);
+            case 3: return ListFragment.newInstance("ListFragment", "Instance 2", 3);
             default: return ListFragment.newInstance("ListFragment", "Instance Default", 2);
         }
     }
 
     @Override
-    public int getIconResId(int i) {
-        return 0;
+    public int getPageIconResId(int i) {
+        return tabIcons[i];
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
-    @Override
+    /*@Override
     public CharSequence getPageTitle(int position) {
         String title = "";
         switch(position){
@@ -59,7 +62,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter implements IconPagerAda
                 break;
         }
         return title;
-    }
+    }*/
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
