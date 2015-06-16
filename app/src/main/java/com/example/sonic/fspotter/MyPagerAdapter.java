@@ -32,8 +32,8 @@ public class MyPagerAdapter extends FragmentPagerAdapter implements PagerSliding
             case 0: return MapFragment.newInstance("MapFragment", "Instance 1");
             case 1: return CreateFragment.newInstance("CreateFragment", "Instance 1");
             case 2: return ListFragment.newInstance("ListFragment", "Instance 1", 2);
-            case 3: return ListFragment.newInstance("ListFragment", "Instance 2", 3);
-            default: return ListFragment.newInstance("ListFragment", "Instance Default", 2);
+            case 3: return SettingsFragment.newInstance("SettingsFragment", "Instance 1", 3);
+            default: return CreateFragment.newInstance("ListFragment", "Instance Default");
         }
     }
 
