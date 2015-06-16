@@ -3,7 +3,6 @@ package com.example.sonic.fspotter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +70,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.listfrag_list_item, parent, false);
+                R.layout.fragment_list_list_item, parent, false);
         ViewHolder holder = new ViewHolder(view, new ListAdapter.ViewHolder.IMyViewHolderClicks() {
 
             public void onPotato(View caller, int position) {

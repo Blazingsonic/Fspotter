@@ -1,17 +1,12 @@
 package com.example.sonic.fspotter;
 
-import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by sonic on 15.06.15.
@@ -47,7 +42,7 @@ public class CreateFragment extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.createfrag, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_create, container, false);
 
         return rootView;
     }
