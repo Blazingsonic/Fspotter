@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import com.example.sonic.fspotter.R;
 import com.example.sonic.fspotter.activities.ActivityMain;
 import com.example.sonic.fspotter.adapters.AdapterDrawer;
-import com.example.sonic.fspotter.materialtest.MyApplication;
+import com.example.sonic.fspotter.fspotter.MyApplication;
 import com.example.sonic.fspotter.pojo.Information;
 
 import java.util.ArrayList;

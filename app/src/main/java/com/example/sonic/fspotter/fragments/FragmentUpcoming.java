@@ -23,7 +23,7 @@ import com.example.sonic.fspotter.database.DBMovies;
 import com.example.sonic.fspotter.extras.MovieSorter;
 import com.example.sonic.fspotter.extras.SortListener;
 import com.example.sonic.fspotter.logging.L;
-import com.example.sonic.fspotter.materialtest.MyApplication;
+import com.example.sonic.fspotter.fspotter.MyApplication;
 import com.example.sonic.fspotter.pojo.Movie;
 import com.example.sonic.fspotter.task.TaskLoadUpcomingMovies;
 

@@ -1,4 +1,4 @@
-package com.example.sonic.fspotter.materialtest;
+package com.example.sonic.fspotter.fspotter;
 
 import android.app.Application;
 import android.content.Context;

@@ -6,7 +6,7 @@ import android.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.example.sonic.fspotter.materialtest.MyApplication;
+import com.example.sonic.fspotter.fspotter.MyApplication;
 
 
 /**

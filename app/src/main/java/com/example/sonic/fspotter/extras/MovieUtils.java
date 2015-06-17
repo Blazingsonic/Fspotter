@@ -7,7 +7,7 @@ import com.example.sonic.fspotter.database.DBMovies;
 import com.example.sonic.fspotter.json.Endpoints;
 import com.example.sonic.fspotter.json.Parser;
 import com.example.sonic.fspotter.json.Requestor;
-import com.example.sonic.fspotter.materialtest.MyApplication;
+import com.example.sonic.fspotter.fspotter.MyApplication;
 import com.example.sonic.fspotter.pojo.Movie;
 
 import org.json.JSONObject;
