@@ -16,6 +16,7 @@ import com.example.sonic.fspotter.extras.GifDataDownloader;
 import com.felipecsl.gifimageview.library.GifImageView;
 import com.koushikdutta.ion.Ion;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 public class AcivitySplashScreen extends ActionBarActivity {
@@ -33,15 +34,20 @@ public class AcivitySplashScreen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acivity_splash_screen);
 
+        InputStream stream = null;
+        try {
+            stream = getAssets().open("loading_gif_400x400_final.gif");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         ImageView gif = (ImageView) findViewById(R.id.imageView);
-        Ion.with(gif).load("http://media2.giphy.com/media/8KrhxtEsrdhD2/giphy.gif");
-
-
+        Ion.with(gif).load("android.resource://" + getPackageName() + "/" + R.drawable.loading_gif_400x400_final);
 
         Thread timerThread = new Thread(){
             public void run(){
                 try{
-                    sleep(30000);
+                    sleep(3000);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{

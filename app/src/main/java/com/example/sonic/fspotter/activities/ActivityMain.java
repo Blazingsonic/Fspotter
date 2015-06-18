@@ -87,31 +87,6 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setLogo(R.drawable.logo_small);
-
-        /*gifImageView = (GifImageView) findViewById(R.id.gifImageView);
-
-
-
-        new GifDataDownloader() {
-            @Override
-            protected void onPostExecute(final byte[] bytes) {
-                gifImageView.setBytes(bytes);
-                gifImageView.startAnimation();
-                Log.d("fefe", "GIF width is " + gifImageView.getGifWidth());
-                Log.d("efef", "GIF height is " + gifImageView.getGifHeight());
-            }
-        }.execute("http://gifs.joelglovier.com/aha/aha.gif");*/
-
-        /*InputStream stream = null;
-        try {
-            stream = getAssets().open("loading_gif_400x400_final.gif");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        GifWebView view = new GifWebView(this, "src/main/assets//loading_gif_400x400_final.gif");
-
-        setContentView(view);*/
     }
 
     private void setupDrawer() {

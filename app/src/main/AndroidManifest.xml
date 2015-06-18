@@ -35,7 +35,7 @@
         </activity>
         <activity
             android:name=".activities.AcivitySplashScreen"
-            android:label="@string/title_activity_acivity_splash_screen" >
+            android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
