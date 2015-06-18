@@ -21,13 +21,12 @@ import com.example.sonic.fspotter.extras.SortListener;
 import com.example.sonic.fspotter.fragments.FragmentBoxOffice;
 import com.example.sonic.fspotter.fragments.FragmentDrawer;
 import com.example.sonic.fspotter.fragments.FragmentUpcoming;
-import com.example.sonic.fspotter.fragments.MapFragment;
+import com.example.sonic.fspotter.fragments.FragmentMap;
 import com.example.sonic.fspotter.fragments.SettingsFragment;
 import com.example.sonic.fspotter.logging.L;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
-
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -123,13 +122,8 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     }
 
     private void setupFAB() {
-        //define the icon for the main floating action button
-        ImageView iconFAB = new ImageView(this);
-        iconFAB.setImageResource(R.drawable.ic_action_new);
-
         //set the appropriate background for the main floating action button along with its icon
         mFAB = new FloatingActionButton.Builder(this)
-                .setContentView(iconFAB)
                 .setBackgroundDrawable(R.drawable.selector_button_red)
                 .build();
 
@@ -263,7 +257,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
 //            L.m("getItem called for " + num);
             switch (num) {
                 case TAB_MAP:
-                    fragment = MapFragment.newInstance("", "");
+                    fragment = FragmentMap.newInstance("", "");
                     break;
                 case TAB_CREATE:
                     fragment = FragmentBoxOffice.newInstance("", "");

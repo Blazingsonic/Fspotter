@@ -20,11 +20,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MapFragment#newInstance} factory method to
+ * Use the {@link FragmentMap#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapFragment extends Fragment {
-    public static final String TAG = MapFragment.class.getSimpleName();
+public class FragmentMap extends Fragment {
+    public static final String TAG = FragmentMap.class.getSimpleName();
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -35,12 +35,12 @@ public class MapFragment extends Fragment {
     MapView mMapView;
     private GoogleMap googleMap;
 
-    public MapFragment() {
+    public FragmentMap() {
     }
 
-    public static MapFragment newInstance(String param1, String param2) {
+    public static FragmentMap newInstance(String param1, String param2) {
 
-        MapFragment fragment = new MapFragment();
+        FragmentMap fragment = new FragmentMap();
         Bundle bundle = new Bundle();
         bundle.putString(ARG_PARAM1, param1);
         bundle.putString(ARG_PARAM2, param2);
@@ -62,7 +62,7 @@ public class MapFragment extends Fragment {
         Log.i(TAG, " " + mParam1 + ", " + mParam2);
     }
 
-    @Override
+    /*@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // inflat and return the layout
@@ -125,5 +125,5 @@ public class MapFragment extends Fragment {
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
-    }
+    }*/
 }

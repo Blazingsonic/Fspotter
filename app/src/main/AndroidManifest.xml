@@ -31,44 +31,12 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDI_LmAUssgwxPkAqCkTv9z6MWLE8ysHlc" />
+            android:value="AIzaSyAKhkCo2AXXl6G2NQ5W7VZfBjCMdyGPe0o" />
 
         <activity
             android:name=".activities.ActivityRecyclerAnimators"
             android:label="@string/title_activity_activity_recycler_animators" >
         </activity>
     </application>
-
-    <!--<application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name=".activities.ActivityMain"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDI_LmAUssgwxPkAqCkTv9z6MWLE8ysHlc" />
-
-        <activity
-            android:name=".LocationDetailActivity"
-            android:label="@string/title_activity_location_detail" >
-        </activity>
-        <activity
-            android:name=".activities.ActivityRecyclerAnimators"
-            android:label="@string/title_activity_activity_recycler_animators" >
-        </activity>
-    </application>-->
 
 </manifest>
