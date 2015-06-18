@@ -1,18 +1,27 @@
 package com.example.sonic.fspotter.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sonic.fspotter.R;
+import com.example.sonic.fspotter.extras.Blur;
+import com.example.sonic.fspotter.extras.GifDataDownloader;
 import com.example.sonic.fspotter.pojo.Information;
+import com.felipecsl.gifimageview.library.GifImageView;
 
 import java.util.Collections;
 import java.util.List;
+
+import butterknife.ButterKnife;
 
 
 /**
@@ -24,6 +33,15 @@ public class AdapterDrawer extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private static final int TYPE_ITEM=1;
     private LayoutInflater inflater;
     private Context context;
+
+    private static final String TAG = "MainActivity";
+    private GifImageView gifImageView;
+    private Button btnToggle;
+    private Button btnBlur;
+
+    private boolean shouldBlur = false;
+    Blur blur;
+
     public AdapterDrawer(Context context, List<Information> data){
         this.context=context;
         inflater=LayoutInflater.from(context);
@@ -39,6 +57,7 @@ public class AdapterDrawer extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if(viewType==TYPE_HEADER){
             View view=inflater.inflate(R.layout.drawer_header, parent,false);
             HeaderHolder holder=new HeaderHolder(view);
+
             return holder;
         }
         else{

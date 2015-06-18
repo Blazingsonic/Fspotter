@@ -1,5 +1,6 @@
 package com.example.sonic.fspotter.activities;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,8 @@ import android.widget.ImageView;
 
 import com.example.sonic.fspotter.R;
 import com.example.sonic.fspotter.anim.AnimationUtils;
+import com.example.sonic.fspotter.extras.GifDataDownloader;
+import com.example.sonic.fspotter.extras.GifWebView;
 import com.example.sonic.fspotter.extras.SortListener;
 import com.example.sonic.fspotter.fragments.FragmentBoxOffice;
 import com.example.sonic.fspotter.fragments.FragmentDrawer;
@@ -24,9 +28,13 @@ import com.example.sonic.fspotter.fragments.FragmentUpcoming;
 import com.example.sonic.fspotter.fragments.FragmentMap;
 import com.example.sonic.fspotter.fragments.SettingsFragment;
 import com.example.sonic.fspotter.logging.L;
+import com.felipecsl.gifimageview.library.GifImageView;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -66,6 +74,8 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     private FloatingActionMenu mFABMenu;
     private FragmentDrawer mDrawerFragment;
 
+    private GifImageView gifImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +86,32 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         //animate the Toolbar when it comes into the picture
         AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mToolbar.setLogo(R.drawable.logo_small);
+
+        /*gifImageView = (GifImageView) findViewById(R.id.gifImageView);
+
+
+
+        new GifDataDownloader() {
+            @Override
+            protected void onPostExecute(final byte[] bytes) {
+                gifImageView.setBytes(bytes);
+                gifImageView.startAnimation();
+                Log.d("fefe", "GIF width is " + gifImageView.getGifWidth());
+                Log.d("efef", "GIF height is " + gifImageView.getGifHeight());
+            }
+        }.execute("http://gifs.joelglovier.com/aha/aha.gif");*/
+
+        /*InputStream stream = null;
+        try {
+            stream = getAssets().open("loading_gif_400x400_final.gif");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        GifWebView view = new GifWebView(this, "src/main/assets//loading_gif_400x400_final.gif");
+
+        setContentView(view);*/
     }
 
     private void setupDrawer() {

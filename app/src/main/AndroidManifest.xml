@@ -19,11 +19,7 @@
         <activity
             android:name=".activities.ActivityMain"
             android:label="@string/title_activity_main" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
@@ -36,6 +32,15 @@
         <activity
             android:name=".activities.ActivityRecyclerAnimators"
             android:label="@string/title_activity_activity_recycler_animators" >
+        </activity>
+        <activity
+            android:name=".activities.AcivitySplashScreen"
+            android:label="@string/title_activity_acivity_splash_screen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

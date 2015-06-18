@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:src="@drawable/ic_abstract"
+        android:src="@drawable/loading_gif_400x400_final"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="32dp"
@@ -20,6 +20,14 @@
         app:border_color="@android:color/white"
         app:border_width="4dp"
         app:shadow="true" />
+
+    <com.felipecsl.gifimageview.library.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/image_profile" />
 
     <LinearLayout
         android:layout_centerVertical="true"
@@ -32,18 +40,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hi"
-            android:gravity="right"
-            android:textColor="@android:color/white"
-            style="@style/TextAppearance.AppCompat.Large" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Vivz"
+            android:text="Welcome to Fspotter"
             android:textColor="@android:color/white"
             android:gravity="right"
-            style="@style/TextAppearance.AppCompat.Medium" />
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
 
         <View
             android:layout_width="match_parent"
@@ -53,7 +55,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="slidenerd@gmail.com"
+            android:text="fspotterteam@web.de"
             android:textColor="@android:color/white"
             android:gravity="right"
             style="@style/TextAppearance.AppCompat.Small" />

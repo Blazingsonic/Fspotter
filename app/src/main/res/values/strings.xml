@@ -53,5 +53,6 @@
     <string name="action_shared_transitions">SharedElementsTransition</string>
     <string name="title_activity_activity_detail">ActivityDetail</string>
     <string name="title_activity_activity_recycler_animators">Detail</string>
+    <string name="title_activity_acivity_splash_screen">AcivitySplashScreen</string>
 
 </resources>

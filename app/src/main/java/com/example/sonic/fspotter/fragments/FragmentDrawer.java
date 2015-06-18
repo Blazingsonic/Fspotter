@@ -1,6 +1,8 @@
 package com.example.sonic.fspotter.fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -15,12 +17,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.sonic.fspotter.R;
 import com.example.sonic.fspotter.activities.ActivityMain;
 import com.example.sonic.fspotter.adapters.AdapterDrawer;
+import com.example.sonic.fspotter.extras.GifDataDownloader;
 import com.example.sonic.fspotter.fspotter.MyApplication;
 import com.example.sonic.fspotter.pojo.Information;
+import com.felipecsl.gifimageview.library.GifImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +67,8 @@ public class FragmentDrawer extends Fragment {
     private View mContainer;
     private boolean mDrawerOpened = false;
 
+
+
     public FragmentDrawer() {
         // Required empty public constructor
     }
@@ -91,6 +98,7 @@ public class FragmentDrawer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
     }
 

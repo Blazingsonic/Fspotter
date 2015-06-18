@@ -62,7 +62,7 @@ public class FragmentMap extends Fragment {
         Log.i(TAG, " " + mParam1 + ", " + mParam2);
     }
 
-    /*@Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // inflat and return the layout
@@ -125,5 +125,5 @@ public class FragmentMap extends Fragment {
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
-    }*/
+    }
 }
