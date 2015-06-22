@@ -18,11 +18,11 @@ import android.widget.ImageView;
 import com.example.sonic.fspotter.R;
 import com.example.sonic.fspotter.anim.AnimationUtils;
 import com.example.sonic.fspotter.extras.SortListener;
+import com.example.sonic.fspotter.fragments.FragmentCreate;
 import com.example.sonic.fspotter.fragments.FragmentLocations;
 import com.example.sonic.fspotter.fragments.FragmentDrawer;
-import com.example.sonic.fspotter.fragments.FragmentUpcoming;
 import com.example.sonic.fspotter.fragments.FragmentMap;
-import com.example.sonic.fspotter.fragments.SettingsFragment;
+import com.example.sonic.fspotter.fragments.FragmentSettings;
 import com.example.sonic.fspotter.logging.L;
 import com.felipecsl.gifimageview.library.GifImageView;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
@@ -267,10 +267,10 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
                     fragment = FragmentLocations.newInstance("", "");
                     break;
                 case TAB_LIST:
-                    fragment = FragmentUpcoming.newInstance("", "");
+                    fragment = FragmentCreate.newInstance("", "", 3);
                     break;
                 case TAB_SETTINGS:
-                    fragment = SettingsFragment.newInstance("", "", 4);
+                    fragment = FragmentSettings.newInstance("", "", 4);
                     break;
             }
             return fragment;

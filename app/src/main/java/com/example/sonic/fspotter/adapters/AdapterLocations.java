@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.sonic.fspotter.R;
-import com.example.sonic.fspotter.activities.ActivityRecyclerAnimators;
+import com.example.sonic.fspotter.activities.ActivityDetail;
 import com.example.sonic.fspotter.anim.AnimationUtils;
 import com.example.sonic.fspotter.extras.Constants;
 import com.example.sonic.fspotter.network.VolleySingleton;
@@ -22,7 +22,6 @@ import com.example.sonic.fspotter.pojo.Location;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 /**
@@ -62,7 +61,7 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
 
             public void onPotato(View caller, int position) {
                 // Start new intent
-                Intent intent = new Intent(mContext, ActivityRecyclerAnimators.class);
+                Intent intent = new Intent(mContext, ActivityDetail.class);
                 intent.putExtra("Name", mListLocations.get(position).getLocationName());
                 mContext.startActivity(intent);
             }

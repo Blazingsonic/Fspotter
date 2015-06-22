@@ -14,10 +14,12 @@
     <string name="search_movies">Search Movies</string>
 
     <string name="stern_prompt">Choose a ranking</string>
-    <string-array name="sterne_array">
-        <item>Kategorie zum Sortieren auswählen</item>
-        <item>Nach Sternen sortieren</item>
-        <item>Nach Entfernung sortieren</item>
+    <string-array name="map_icon_array">
+        <item>Kategorie auswählen</item>
+        <item>Natur</item>
+        <item>Architektur</item>
+        <item>Leben</item>
+        <item>Sonstiges</item>
     </string-array>
 
     <string-array name="tabs">
@@ -52,8 +54,7 @@
     <string name="title_activity_activity_shared">Shared A</string>
     <string name="title_activity_activity_shared_b">Shared B</string>
     <string name="action_shared_transitions">SharedElementsTransition</string>
-    <string name="title_activity_activity_detail">ActivityDetail</string>
-    <string name="title_activity_activity_recycler_animators">Detail</string>
+    <string name="title_activity_detail"></string>
     <string name="title_activity_acivity_splash_screen">AcivitySplashScreen</string>
 
 </resources>

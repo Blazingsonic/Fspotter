@@ -176,6 +176,7 @@ public class FragmentLocations extends Fragment implements SortListener, Locatio
         if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
         }
+        mListLocations = listLocations; // diese Zeile habe ich zusätzlich eingefügt, um auch die direkt geladenen Locations sortierbar zu machen
         mAdapter.setLocations(listLocations);
     }
 

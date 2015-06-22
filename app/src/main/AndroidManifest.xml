@@ -30,8 +30,8 @@
             android:value="AIzaSyAKhkCo2AXXl6G2NQ5W7VZfBjCMdyGPe0o" />
 
         <activity
-            android:name=".activities.ActivityRecyclerAnimators"
-            android:label="@string/title_activity_activity_recycler_animators" >
+            android:name=".activities.ActivityDetail"
+            android:label="@string/title_activity_detail" >
         </activity>
         <activity
             android:name=".activities.AcivitySplashScreen"
