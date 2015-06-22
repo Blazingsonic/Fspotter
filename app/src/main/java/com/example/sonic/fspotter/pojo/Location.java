@@ -24,15 +24,12 @@ public class Location implements Parcelable {
         }
     };
     private long id;
-    private String title;
-    private Date releaseDateTheater;
-    private int audienceScore;
-    private String synopsis;
-    private String urlThumbnail;
-    private String urlSelf;
-    private String urlCast;
-    private String urlReviews;
-    private String urlSimilar;
+    private String locationName;
+    private String description;
+    private double latitude;
+    private double longitude;
+    private String hints;
+    private String mapIconId;
 
     public Location() {
 
@@ -40,38 +37,30 @@ public class Location implements Parcelable {
 
     public Location(Parcel input) {
         id = input.readLong();
-        title = input.readString();
-        long dateMillis=input.readLong();
-        releaseDateTheater = (dateMillis == -1 ? null : new Date(dateMillis));
-        audienceScore = input.readInt();
-        synopsis = input.readString();
-        urlThumbnail = input.readString();
-        urlSelf = input.readString();
-        urlCast = input.readString();
-        urlReviews = input.readString();
-        urlSimilar = input.readString();
+        locationName = input.readString();
+        description = input.readString();
+        latitude = input.readInt();
+        longitude = input.readDouble();
+        hints = input.readString();
+        mapIconId = input.readString();
+
     }
 
     public Location(long id,
-                    String title,
-                    Date releaseDateTheater,
-                    int audienceScore,
-                    String synopsis,
-                    String urlThumbnail,
-                    String urlSelf,
-                    String urlCast,
-                    String urlReviews,
-                    String urlSimilar) {
+                    String locationName,
+                    String description,
+                    double latitude,
+                    double longitude,
+                    String hints,
+                    String mapIconId) {
         this.id = id;
-        this.title = title;
-        this.releaseDateTheater = releaseDateTheater;
-        this.audienceScore = audienceScore;
-        this.synopsis = synopsis;
-        this.urlThumbnail = urlThumbnail;
-        this.urlSelf = urlSelf;
-        this.urlCast = urlCast;
-        this.urlReviews = urlReviews;
-        this.urlSimilar = urlSimilar;
+        this.locationName = locationName;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.hints = hints;
+        this.mapIconId = mapIconId;
+
     }
 
     public long getId() {
@@ -82,90 +71,64 @@ public class Location implements Parcelable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
-    public Date getReleaseDateTheater() {
-        return releaseDateTheater;
+    public String getDescription() {
+        return description;
     }
 
-    public void setReleaseDateTheater(Date releaseDateTheater) {
-        this.releaseDateTheater = releaseDateTheater;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getAudienceScore() {
-        return audienceScore;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setAudienceScore(int audienceScore) {
-        this.audienceScore = audienceScore;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public String getSynopsis() {
-        return synopsis;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
-    public String getUrlThumbnail() {
-        return urlThumbnail;
+    public String getHints() {
+        return hints;
     }
 
-    public void setUrlThumbnail(String urlThumbnail) {
-        this.urlThumbnail = urlThumbnail;
+    public void setHints(String hints) {
+        this.hints = hints;
     }
 
-    public String getUrlSelf() {
-        return urlSelf;
+    public String getMapIconId() {
+        return mapIconId;
     }
 
-    public void setUrlSelf(String urlSelf) {
-        this.urlSelf = urlSelf;
+    public void setMapIconId(String mapIconId) {
+        this.mapIconId = mapIconId;
     }
 
-    public String getUrlCast() {
-        return urlCast;
-    }
-
-    public void setUrlCast(String urlCast) {
-        this.urlCast = urlCast;
-    }
-
-    public String getUrlReviews() {
-        return urlReviews;
-    }
-
-    public void setUrlReviews(String urlReviews) {
-        this.urlReviews = urlReviews;
-    }
-
-    public String getUrlSimilar() {
-        return urlSimilar;
-    }
-
-    public void setUrlSimilar(String urlSimilar) {
-        this.urlSimilar = urlSimilar;
-    }
 
     @Override
     public String toString() {
         return "\nID: " + id +
-                "\nTitle " + title +
-                "\nDate " + releaseDateTheater +
-                "\nSynopsis " + synopsis +
-                "\nScore " + audienceScore +
-                "\nurlThumbnail " + urlThumbnail +
-                "\nurlSelf " + urlSelf +
-                "\nurlCast " + urlCast +
-                "\nurlReviews " + urlReviews +
-                "\nurlSimilar " + urlSimilar +
+                "\nTitle " + locationName +
+                "\nDate " + description +
+                "\nSynopsis " + longitude +
+                "\nScore " + latitude +
+                "\nhints " + hints +
+                "\nmapIconId " + mapIconId +
                 "\n";
     }
 
@@ -179,15 +142,12 @@ public class Location implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
 //        L.m("writeToParcel Location");
         dest.writeLong(id);
-        dest.writeString(title);
-        dest.writeLong(releaseDateTheater == null ? -1 : releaseDateTheater.getTime());
-        dest.writeInt(audienceScore);
-        dest.writeString(synopsis);
-        dest.writeString(urlThumbnail);
-        dest.writeString(urlSelf);
-        dest.writeString(urlCast);
-        dest.writeString(urlReviews);
-        dest.writeString(urlSimilar);
+        dest.writeString(locationName);
+        dest.writeString(description);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeString(hints);
+        dest.writeString(mapIconId);
 
     }
 }

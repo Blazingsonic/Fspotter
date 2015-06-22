@@ -15,19 +15,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_AUDIENCE_SCORE;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_CAST;
+import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_HINTS;
 import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_ID;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_LINKS;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_POSTERS;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_RATINGS;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_RELEASE_DATES;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_REVIEWS;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_SELF;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_SIMILAR;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_SYNOPSIS;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_THEATER;
-import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_THUMBNAIL;
+import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_LOCATIONS;
+import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_LOCATION_NAME;
+import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_MAP_ICON_ID;
+import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_LONGITUDE;
+import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_DESCRIPTION;
+import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_LATITUDE;
 
 /**
  * Created by Windows on 02-03-2015.
@@ -38,98 +33,69 @@ public class Parser {
         ArrayList<Location> listLocations = new ArrayList<>();
         if (response != null && response.length() > 0) {
             try {
-                JSONArray arrayLocations = response.getJSONArray("tasks");
+                JSONArray arrayLocations = response.getJSONArray(KEY_LOCATIONS);
                 Log.v("JSON TASKS", arrayLocations.toString());
                 for (int i = 0; i < arrayLocations.length(); i++) {
                     long id = -1;
-                    String title = Constants.NA;
-                    String releaseDate = Constants.NA;
-                    int audienceScore = -1;
-                    String synopsis = Constants.NA;
-                    String urlThumbnail = Constants.NA;
-                    String urlSelf = Constants.NA;
-                    String urlCast = Constants.NA;
-                    String urlReviews = Constants.NA;
-                    String urlSimilar = Constants.NA;
+                    String locationName = Constants.NA;
+                    String description = Constants.NA;
+                    double latitude = 40;
+                    double longitude = 80;
+                    String hints = Constants.NA;
+                    String mapIconId = Constants.NA;
 
                     JSONObject currentMovie = arrayLocations.getJSONObject(i);
                     Log.v("JSON CURRENT", currentMovie.toString());
-                    Log.v("JSON CURRENT TASK", currentMovie.getString("task"));
+                    //Log.v("JSON CURRENT TASK", currentMovie.getString("task"));
                     //get the id of the current location
                     if (Utils.contains(currentMovie, KEY_ID)) {
                         id = currentMovie.getLong(KEY_ID);
                     }
                     //get the title of the current location
-                    if (Utils.contains(currentMovie, "task")) {
-                        title = currentMovie.getString("task");
+                    if (Utils.contains(currentMovie, KEY_LOCATION_NAME)) {
+                        locationName = currentMovie.getString(KEY_LOCATION_NAME);
                     }
 
                     //get the date in theaters for the current location
-                    if (Utils.contains(currentMovie, KEY_RELEASE_DATES)) {
-                        JSONObject objectReleaseDates = currentMovie.getJSONObject(KEY_RELEASE_DATES);
+                    if (Utils.contains(currentMovie, KEY_DESCRIPTION)) {
+                        description = currentMovie.getString(KEY_DESCRIPTION);
 
-                        if (Utils.contains(objectReleaseDates, KEY_THEATER)) {
-                            releaseDate = objectReleaseDates.getString(KEY_THEATER);
-                        }
                     }
 
                     //get the audience score for the current location
+                    if (Utils.contains(currentMovie, KEY_LATITUDE)) {
+                        latitude = currentMovie.getDouble(KEY_LATITUDE);
+                    }
 
-                    if (Utils.contains(currentMovie, KEY_RATINGS)) {
-                        JSONObject objectRatings = currentMovie.getJSONObject(KEY_RATINGS);
-                        if (Utils.contains(objectRatings, KEY_AUDIENCE_SCORE)) {
-                            audienceScore = objectRatings.getInt(KEY_AUDIENCE_SCORE);
-                        }
+                    //get the audience score for the current location
+                    if (Utils.contains(currentMovie, KEY_LONGITUDE)) {
+                        longitude = currentMovie.getDouble(KEY_LONGITUDE);
                     }
 
                     // get the synopsis of the current location
-                    if (Utils.contains(currentMovie, KEY_SYNOPSIS)) {
-                        synopsis = currentMovie.getString(KEY_SYNOPSIS);
+                    if (Utils.contains(currentMovie, KEY_HINTS)) {
+                        hints = currentMovie.getString(KEY_HINTS);
                     }
 
                     //get the url for the thumbnail to be displayed inside the current location result
-                    if (Utils.contains(currentMovie, KEY_POSTERS)) {
-                        JSONObject objectPosters = currentMovie.getJSONObject(KEY_POSTERS);
-
-                        if (Utils.contains(objectPosters, KEY_THUMBNAIL)) {
-                            urlThumbnail = objectPosters.getString(KEY_THUMBNAIL);
-                        }
+                    if (Utils.contains(currentMovie, KEY_MAP_ICON_ID)) {
+                        mapIconId = currentMovie.getString(KEY_MAP_ICON_ID);
                     }
 
-                    //get the url of the related links
-                    if (Utils.contains(currentMovie, KEY_LINKS)) {
-                        JSONObject objectLinks = currentMovie.getJSONObject(KEY_LINKS);
-                        if (Utils.contains(objectLinks, KEY_SELF)) {
-                            urlSelf = objectLinks.getString(KEY_SELF);
-                        }
-                        if (Utils.contains(objectLinks, KEY_CAST)) {
-                            urlCast = objectLinks.getString(KEY_CAST);
-                        }
-                        if (Utils.contains(objectLinks, KEY_REVIEWS)) {
-                            urlReviews = objectLinks.getString(KEY_REVIEWS);
-                        }
-                        if (Utils.contains(objectLinks, KEY_SIMILAR)) {
-                            urlSimilar = objectLinks.getString(KEY_SIMILAR);
-                        }
-                    }
                     Location location = new Location();
                     location.setId(id);
-                    location.setTitle(title);
+                    location.setLocationName(locationName);
                     Date date = null;
                     try {
-                        date = dateFormat.parse(releaseDate);
+                        date = dateFormat.parse(description);
                     } catch (ParseException e) {
                         //a parse exception generated here will store null in the release date, be sure to handle it
                     }
-                    location.setReleaseDateTheater(date);
-                    location.setAudienceScore(audienceScore);
-                    location.setSynopsis(synopsis);
-                    location.setUrlThumbnail(urlThumbnail);
-                    location.setUrlSelf(urlSelf);
-                    location.setUrlCast(urlCast);
-                    location.setUrlThumbnail(urlThumbnail);
-                    location.setUrlReviews(urlReviews);
-                    location.setUrlSimilar(urlSimilar);
+                    location.setDescription(description);
+                    location.setLatitude(latitude);
+                    location.setLongitude(longitude);
+                    location.setHints(hints);
+                    location.setMapIconId(mapIconId);
 //                    L.t(getActivity(), location + "");
                     //if (id != -1 && !title.equals(Constants.NA)) {
                     listLocations.add(location);
@@ -141,6 +107,7 @@ public class Parser {
             }
 //                L.t(getActivity(), listLocations.size() + " rows fetched");
         }
+        Log.v("LIST LOCATIONS", listLocations.toString());
         return listLocations;
     }
 

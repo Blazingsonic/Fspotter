@@ -63,7 +63,7 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
             public void onPotato(View caller, int position) {
                 // Start new intent
                 Intent intent = new Intent(mContext, ActivityRecyclerAnimators.class);
-                intent.putExtra("Name", mListLocations.get(position).getTitle());
+                intent.putExtra("Name", mListLocations.get(position).getLocationName());
                 mContext.startActivity(intent);
             }
         });
@@ -74,25 +74,8 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
     public void onBindViewHolder(ViewHolderLocation holder, int position) {
         Location currentLocation = mListLocations.get(position);
         //one or more fields of the Location object may be null since they are fetched from the web
-        holder.locationTitle.setText(currentLocation.getTitle());
-
-        //retrieved date may be null
-        Date movieReleaseDate = currentLocation.getReleaseDateTheater();
-        if (movieReleaseDate != null) {
-            String formattedDate = mFormatter.format(movieReleaseDate);
-            holder.locationUploadDate.setText(formattedDate);
-        } else {
-            holder.locationUploadDate.setText(Constants.NA);
-        }
-
-        int audienceScore = currentLocation.getAudienceScore();
-        if (audienceScore == -1) {
-            holder.locationScore.setRating(0.0F);
-            holder.locationScore.setAlpha(0.5F);
-        } else {
-            holder.locationScore.setRating(audienceScore / 20.0F);
-            holder.locationScore.setAlpha(1.0F);
-        }
+        holder.locationTitle.setText(currentLocation.getLocationName());
+        holder.locationDescription.setText(currentLocation.getDescription());
 
         if (position > mPreviousPosition) {
             AnimationUtils.animateSunblind(holder, true);
@@ -107,7 +90,7 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
         }
         mPreviousPosition = position;
 
-        String urlThumnail = currentLocation.getUrlThumbnail();
+        String urlThumnail = currentLocation.getHints();
         loadImages(urlThumnail, holder);
 
     }
@@ -138,7 +121,7 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
 
         ImageView locationThumbnail;
         TextView locationTitle;
-        TextView locationUploadDate;
+        TextView locationDescription;
         RatingBar locationScore;
 
         public IMyViewHolderClicks mListener;
@@ -147,7 +130,7 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
             super(itemView);
             locationThumbnail = (ImageView) itemView.findViewById(R.id.locationThumbnail);
             locationTitle = (TextView) itemView.findViewById(R.id.locationTitle);
-            locationUploadDate = (TextView) itemView.findViewById(R.id.locationUploadDate);
+            locationDescription = (TextView) itemView.findViewById(R.id.locationDescription);
             locationScore = (RatingBar) itemView.findViewById(R.id.locationScore);
             mListener = listener;
 

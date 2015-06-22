@@ -28,7 +28,7 @@
         android:textSize="@dimen/size_text_primary" />
 
     <TextView
-        android:id="@+id/locationUploadDate"
+        android:id="@+id/locationDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/locationUploadDate"
+        android:layout_below="@+id/locationDescription"
         android:isIndicator="true"
         android:max="5"
         android:numStars="0" />

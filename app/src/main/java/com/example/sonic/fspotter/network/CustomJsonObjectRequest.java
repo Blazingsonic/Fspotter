@@ -22,7 +22,7 @@ public class CustomJsonObjectRequest extends JsonObjectRequest
     @Override
     public Map getHeaders() throws AuthFailureError {
         Map headers = new HashMap();
-        headers.put("Authorization", "6c7e40dc7756f2132331a7893f1a97be");
+        headers.put("Authorization", "bf03bbb0455edb2e2b228d0b2d66b468");
         return headers;
     }
 

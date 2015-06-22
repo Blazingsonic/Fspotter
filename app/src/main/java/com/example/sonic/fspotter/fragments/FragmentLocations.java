@@ -97,7 +97,7 @@ public class FragmentLocations extends Fragment implements SortListener, Locatio
             mListLocations = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
         } else {
             //if this fragment starts for the first time, load the list of movies from a database
-            mListLocations = MyApplication.getWritableDatabase().readLocations(DBLocations.BOX_OFFICE);
+            mListLocations = MyApplication.getWritableDatabase().readLocations(DBLocations.LOCATIONS);
             //if the database is empty, trigger an AsycnTask to download movie list from the web
             if (mListLocations.isEmpty()) {
                 L.m("FragmentLocations: executing task from fragment");

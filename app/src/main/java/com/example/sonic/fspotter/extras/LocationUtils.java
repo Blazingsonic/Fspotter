@@ -24,15 +24,15 @@ public class LocationUtils {
         if (response != null) {
             Log.v("JSON RESPONSE", response.toString());
         }
-        ArrayList<Location> listMovies = Parser.parseLocationsJSON(response);
-        MyApplication.getWritableDatabase().insertLocations(DBLocations.BOX_OFFICE, listMovies, true);
-        return listMovies;
+        ArrayList<Location> listLocations = Parser.parseLocationsJSON(response);
+        MyApplication.getWritableDatabase().insertLocations(DBLocations.LOCATIONS, listLocations, true);
+        return listLocations;
     }
 
     public static ArrayList<Location> loadUpcomingMovies(RequestQueue requestQueue) {
         JSONObject response = Requestor.requestLocationsJSON(requestQueue, Endpoints.getRequestUrlUpcomingMovies(30));
-        ArrayList<Location> listMovies = Parser.parseLocationsJSON(response);
-        MyApplication.getWritableDatabase().insertLocations(DBLocations.UPCOMING, listMovies, true);
-        return listMovies;
+        ArrayList<Location> listLocations = Parser.parseLocationsJSON(response);
+        MyApplication.getWritableDatabase().insertLocations(DBLocations.UPCOMING, listLocations, true);
+        return listLocations;
     }
 }

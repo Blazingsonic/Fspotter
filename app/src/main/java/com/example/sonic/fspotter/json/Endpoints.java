@@ -7,7 +7,7 @@ package com.example.sonic.fspotter.json;
 public class Endpoints {
     public static String getRequestUrlLocations(int limit) {
 
-        return "http://46.101.165.28/task_manager/v1/tasks";
+        return "http://46.101.165.28/task_manager/v1/locations";
         /*return URL_BOX_OFFICE
                 + URL_CHAR_QUESTION
                 + URL_PARAM_API_KEY + MyApplication.API_KEY_ROTTEN_TOMATOES

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.sonic.fspotter.R;
@@ -57,6 +58,9 @@ public class SettingsFragment extends Fragment {
     @InjectView(R.id.spinnerView) Spinner mSpinner;
     @InjectView(R.id.spinnerView2) Spinner mSpinner2;
     @InjectView(R.id.testPostButton) Button mTestPostButton;
+    @InjectView(R.id.locationNameInput) EditText mLocationNameInput;
+    @InjectView(R.id.locationDescriptionInput) EditText mLocationDescription;
+    @InjectView(R.id.locationHintsInput) EditText mLocationHints;
 
     public SettingsFragment() {
     }
@@ -169,12 +173,17 @@ public class SettingsFragment extends Fragment {
             Log.v(TAG, "POOOOSSST");
             HttpClient httpClient = new DefaultHttpClient();
 
-            HttpPost httpPost = new HttpPost("http://46.101.165.28/task_manager/v1/register");
+            HttpPost httpPost = new HttpPost("http://46.101.165.28/task_manager/v1/locations");
+
+            httpPost.setHeader("Authorization", "bf03bbb0455edb2e2b228d0b2d66b468");
 
             List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-            nameValuePair.add(new BasicNameValuePair("name", "testPost"));
-            nameValuePair.add(new BasicNameValuePair("email", "testEmail@web.de"));
-            nameValuePair.add(new BasicNameValuePair("password", "testPassword"));
+            nameValuePair.add(new BasicNameValuePair("locationName", mLocationNameInput.getText().toString()));
+            nameValuePair.add(new BasicNameValuePair("description", mLocationDescription.getText().toString()));
+            nameValuePair.add(new BasicNameValuePair("hints", mLocationHints.getText().toString()));
+            nameValuePair.add(new BasicNameValuePair("latitude", "42.82348923"));
+            nameValuePair.add(new BasicNameValuePair("longitude", "8.34987234"));
+            nameValuePair.add(new BasicNameValuePair("mapIconId", "natureneuneu"));
 
             //Encoding POST data
             try {

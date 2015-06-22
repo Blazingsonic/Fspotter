@@ -31,8 +31,8 @@ public class TaskLoadLocations extends AsyncTask<Void, Void, ArrayList<Location>
     @Override
     protected ArrayList<Location> doInBackground(Void... params) {
 
-        ArrayList<Location> listMovies = LocationUtils.loadLocations(requestQueue);
-        return listMovies;
+        ArrayList<Location> listLocations = LocationUtils.loadLocations(requestQueue);
+        return listLocations;
     }
 
     @Override

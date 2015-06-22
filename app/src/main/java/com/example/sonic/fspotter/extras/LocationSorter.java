@@ -16,7 +16,7 @@ public class LocationSorter {
         Collections.sort(movies, new Comparator<Location>() {
             @Override
             public int compare(Location lhs, Location rhs) {
-                return lhs.getTitle().compareTo(rhs.getTitle());
+                return lhs.getLocationName().compareTo(rhs.getLocationName());
             }
         });
     }
@@ -25,16 +25,16 @@ public class LocationSorter {
         Collections.sort(movies, new Comparator<Location>() {
             @Override
             public int compare(Location lhs, Location rhs) {
-                Date lhsDate=lhs.getReleaseDateTheater();
-                Date rhsDate=rhs.getReleaseDateTheater();
-                if(lhs.getReleaseDateTheater()!=null && rhs.getReleaseDateTheater()!=null)
+                /*Date lhsDate=lhs.getDescription();
+                Date rhsDate=rhs.getDescription();
+                if(lhs.getDescription()!=null && rhs.getDescription()!=null)
                 {
-                    return rhs.getReleaseDateTheater().compareTo(lhs.getReleaseDateTheater());
+                    return rhs.getDescription().compareTo(lhs.getDescription());
                 }
                 else {
                     return 0;
-                }
-
+                }*/
+                return 0;
             }
         });
     }
@@ -42,8 +42,8 @@ public class LocationSorter {
         Collections.sort(movies, new Comparator<Location>() {
             @Override
             public int compare(Location lhs, Location rhs) {
-                int ratingLhs=lhs.getAudienceScore();
-                int ratingRhs=rhs.getAudienceScore();
+                double ratingLhs=lhs.getLatitude();
+                double ratingRhs=rhs.getLatitude();
                 if(ratingLhs<ratingRhs)
                 {
                     return 1;
