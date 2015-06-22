@@ -5,9 +5,9 @@ package com.example.sonic.fspotter.json;
  * Created by Windows on 02-03-2015.
  */
 public class Endpoints {
-    public static String getRequestUrlBoxOfficeMovies(int limit) {
+    public static String getRequestUrlLocations(int limit) {
 
-        return "https://gowdy.iriscouch.com/gowdy/_design/gowdy/_view/alleKneipen";
+        return "http://46.101.165.28/task_manager/v1/tasks";
         /*return URL_BOX_OFFICE
                 + URL_CHAR_QUESTION
                 + URL_PARAM_API_KEY + MyApplication.API_KEY_ROTTEN_TOMATOES

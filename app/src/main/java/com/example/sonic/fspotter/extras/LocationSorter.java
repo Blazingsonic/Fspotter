@@ -1,6 +1,6 @@
 package com.example.sonic.fspotter.extras;
 
-import com.example.sonic.fspotter.pojo.Movie;
+import com.example.sonic.fspotter.pojo.Location;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,20 +11,20 @@ import java.util.Date;
 /**
  * Created by Windows on 18-02-2015.
  */
-public class MovieSorter {
-    public void sortMoviesByName(ArrayList<Movie> movies){
-        Collections.sort(movies, new Comparator<Movie>() {
+public class LocationSorter {
+    public void sortLocationsByName(ArrayList<Location> movies){
+        Collections.sort(movies, new Comparator<Location>() {
             @Override
-            public int compare(Movie lhs, Movie rhs) {
+            public int compare(Location lhs, Location rhs) {
                 return lhs.getTitle().compareTo(rhs.getTitle());
             }
         });
     }
-    public void sortMoviesByDate(ArrayList<Movie> movies){
+    public void sortLocationsByDate(ArrayList<Location> movies){
 
-        Collections.sort(movies, new Comparator<Movie>() {
+        Collections.sort(movies, new Comparator<Location>() {
             @Override
-            public int compare(Movie lhs, Movie rhs) {
+            public int compare(Location lhs, Location rhs) {
                 Date lhsDate=lhs.getReleaseDateTheater();
                 Date rhsDate=rhs.getReleaseDateTheater();
                 if(lhs.getReleaseDateTheater()!=null && rhs.getReleaseDateTheater()!=null)
@@ -38,10 +38,10 @@ public class MovieSorter {
             }
         });
     }
-    public void sortMoviesByRating(ArrayList<Movie> movies){
-        Collections.sort(movies, new Comparator<Movie>() {
+    public void sortLocationsByRating(ArrayList<Location> movies){
+        Collections.sort(movies, new Comparator<Location>() {
             @Override
-            public int compare(Movie lhs, Movie rhs) {
+            public int compare(Location lhs, Location rhs) {
                 int ratingLhs=lhs.getAudienceScore();
                 int ratingRhs=rhs.getAudienceScore();
                 if(ratingLhs<ratingRhs)

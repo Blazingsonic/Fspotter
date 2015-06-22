@@ -4,7 +4,7 @@ package com.example.sonic.fspotter.extras;
  * Created by Windows on 10-02-2015.
  */
 public interface Keys {
-    public interface EndpointBoxOffice{
+    public interface EndpointLocations {
         public static final String KEY_MOVIES="movies";
         public static final String KEY_ID="id";
         public static final String KEY_TITLE="title";

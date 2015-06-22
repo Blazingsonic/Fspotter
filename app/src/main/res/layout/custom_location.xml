@@ -9,18 +9,18 @@
     android:paddingTop="@dimen/size_byte">
 
     <ImageView
-        android:id="@+id/movieThumbnail"
+        android:id="@+id/locationThumbnail"
         android:layout_width="@dimen/movie_thumbnail_width"
         android:layout_height="@dimen/movie_thumbnail_height"
         android:layout_centerVertical="true" />
 
     <TextView
-        android:id="@+id/movieTitle"
+        android:id="@+id/locationTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/movieThumbnail"
+        android:layout_alignTop="@+id/locationThumbnail"
         android:layout_marginLeft="56dp"
         android:alpha="0.87"
         android:gravity="right"
@@ -28,22 +28,22 @@
         android:textSize="@dimen/size_text_primary" />
 
     <TextView
-        android:id="@+id/movieReleaseDate"
+        android:id="@+id/locationUploadDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/movieTitle"
+        android:layout_below="@id/locationTitle"
         android:alpha="0.87"
         android:padding="@dimen/size_half_byte"
         android:textSize="@dimen/size_text_secondary" />
 
     <RatingBar
-        android:id="@+id/movieAudienceScore"
+        android:id="@+id/locationScore"
         style="@android:style/Widget.Holo.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/movieReleaseDate"
+        android:layout_below="@id/locationUploadDate"
         android:isIndicator="true"
         android:max="5"
         android:numStars="0" />

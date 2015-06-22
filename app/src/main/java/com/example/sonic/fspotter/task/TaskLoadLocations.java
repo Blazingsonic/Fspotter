@@ -3,7 +3,7 @@ package com.example.sonic.fspotter.task;
 import android.os.AsyncTask;
 
 import com.android.volley.RequestQueue;
-import com.example.sonic.fspotter.callbacks.UpcomingMoviesLoadedListener;
+import com.example.sonic.fspotter.callbacks.LocationsLoadedListener;
 import com.example.sonic.fspotter.extras.LocationUtils;
 import com.example.sonic.fspotter.network.VolleySingleton;
 import com.example.sonic.fspotter.pojo.Location;
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 /**
  * Created by Windows on 02-03-2015.
  */
-public class TaskLoadUpcomingMovies extends AsyncTask<Void, Void, ArrayList<Location>> {
-    private UpcomingMoviesLoadedListener myComponent;
+public class TaskLoadLocations extends AsyncTask<Void, Void, ArrayList<Location>> {
+    private LocationsLoadedListener myComponent;
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
 
 
-    public TaskLoadUpcomingMovies(UpcomingMoviesLoadedListener myComponent) {
+    public TaskLoadLocations(LocationsLoadedListener myComponent) {
 
         this.myComponent = myComponent;
         volleySingleton = VolleySingleton.getInstance();
@@ -31,14 +31,16 @@ public class TaskLoadUpcomingMovies extends AsyncTask<Void, Void, ArrayList<Loca
     @Override
     protected ArrayList<Location> doInBackground(Void... params) {
 
-        ArrayList<Location> listMovies = LocationUtils.loadUpcomingMovies(requestQueue);
+        ArrayList<Location> listMovies = LocationUtils.loadLocations(requestQueue);
         return listMovies;
     }
 
     @Override
     protected void onPostExecute(ArrayList<Location> listMovies) {
         if (myComponent != null) {
-            myComponent.onUpcomingMoviesLoaded(listMovies);
+            myComponent.onLocationsLoaded(listMovies);
         }
     }
+
+
 }

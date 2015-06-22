@@ -29,4 +29,13 @@
         android:id="@+id/spinnerView2"
         android:layout_below="@+id/spinnerView"
         android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/testPostButton"
+        android:layout_below="@+id/spinnerView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

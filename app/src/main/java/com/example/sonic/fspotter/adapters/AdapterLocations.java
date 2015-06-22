@@ -17,7 +17,7 @@ import com.example.sonic.fspotter.activities.ActivityRecyclerAnimators;
 import com.example.sonic.fspotter.anim.AnimationUtils;
 import com.example.sonic.fspotter.extras.Constants;
 import com.example.sonic.fspotter.network.VolleySingleton;
-import com.example.sonic.fspotter.pojo.Movie;
+import com.example.sonic.fspotter.pojo.Location;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,10 +28,10 @@ import java.util.Date;
 /**
  * Created by Windows on 12-02-2015.
  */
-public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolderBoxOffice> {
+public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.ViewHolderLocation> {
 
     //contains the list of movies
-    private ArrayList<Movie> mListMovies = new ArrayList<>();
+    private ArrayList<Location> mListLocations = new ArrayList<>();
     private LayoutInflater mInflater;
     private VolleySingleton mVolleySingleton;
     private ImageLoader mImageLoader;
@@ -42,28 +42,28 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
     Context mContext;
 
 
-    public AdapterMovies(Context context) {
+    public AdapterLocations(Context context) {
         mInflater = LayoutInflater.from(context);
         mVolleySingleton = VolleySingleton.getInstance();
         mImageLoader = mVolleySingleton.getImageLoader();
         mContext = context;
     }
 
-    public void setMovies(ArrayList<Movie> listMovies) {
-        this.mListMovies = listMovies;
+    public void setLocations(ArrayList<Location> listLocations) {
+        this.mListLocations = listLocations;
         //update the adapter to reflect the new set of movies
         notifyDataSetChanged();
     }
 
     @Override
-    public ViewHolderBoxOffice onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.custom_movie_box_office, parent, false);
-        ViewHolderBoxOffice viewHolder = new ViewHolderBoxOffice(view, new ViewHolderBoxOffice.IMyViewHolderClicks() {
+    public ViewHolderLocation onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.custom_location, parent, false);
+        ViewHolderLocation viewHolder = new ViewHolderLocation(view, new ViewHolderLocation.IMyViewHolderClicks() {
 
             public void onPotato(View caller, int position) {
                 // Start new intent
                 Intent intent = new Intent(mContext, ActivityRecyclerAnimators.class);
-                intent.putExtra("Name", mListMovies.get(position).getTitle());
+                intent.putExtra("Name", mListLocations.get(position).getTitle());
                 mContext.startActivity(intent);
             }
         });
@@ -71,27 +71,27 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderBoxOffice holder, int position) {
-        Movie currentMovie = mListMovies.get(position);
-        //one or more fields of the Movie object may be null since they are fetched from the web
-        holder.movieTitle.setText(currentMovie.getTitle());
+    public void onBindViewHolder(ViewHolderLocation holder, int position) {
+        Location currentLocation = mListLocations.get(position);
+        //one or more fields of the Location object may be null since they are fetched from the web
+        holder.locationTitle.setText(currentLocation.getTitle());
 
         //retrieved date may be null
-        Date movieReleaseDate = currentMovie.getReleaseDateTheater();
+        Date movieReleaseDate = currentLocation.getReleaseDateTheater();
         if (movieReleaseDate != null) {
             String formattedDate = mFormatter.format(movieReleaseDate);
-            holder.movieReleaseDate.setText(formattedDate);
+            holder.locationUploadDate.setText(formattedDate);
         } else {
-            holder.movieReleaseDate.setText(Constants.NA);
+            holder.locationUploadDate.setText(Constants.NA);
         }
 
-        int audienceScore = currentMovie.getAudienceScore();
+        int audienceScore = currentLocation.getAudienceScore();
         if (audienceScore == -1) {
-            holder.movieAudienceScore.setRating(0.0F);
-            holder.movieAudienceScore.setAlpha(0.5F);
+            holder.locationScore.setRating(0.0F);
+            holder.locationScore.setAlpha(0.5F);
         } else {
-            holder.movieAudienceScore.setRating(audienceScore / 20.0F);
-            holder.movieAudienceScore.setAlpha(1.0F);
+            holder.locationScore.setRating(audienceScore / 20.0F);
+            holder.locationScore.setAlpha(1.0F);
         }
 
         if (position > mPreviousPosition) {
@@ -107,18 +107,18 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
         }
         mPreviousPosition = position;
 
-        String urlThumnail = currentMovie.getUrlThumbnail();
+        String urlThumnail = currentLocation.getUrlThumbnail();
         loadImages(urlThumnail, holder);
 
     }
 
 
-    private void loadImages(String urlThumbnail, final ViewHolderBoxOffice holder) {
+    private void loadImages(String urlThumbnail, final ViewHolderLocation holder) {
         if (!urlThumbnail.equals(Constants.NA)) {
             mImageLoader.get(urlThumbnail, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                    holder.movieThumbnail.setImageBitmap(response.getBitmap());
+                    holder.locationThumbnail.setImageBitmap(response.getBitmap());
                 }
 
                 @Override
@@ -131,24 +131,24 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.ViewHolder
 
     @Override
     public int getItemCount() {
-        return mListMovies.size();
+        return mListLocations.size();
     }
 
-    public static class ViewHolderBoxOffice extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolderLocation extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView movieThumbnail;
-        TextView movieTitle;
-        TextView movieReleaseDate;
-        RatingBar movieAudienceScore;
+        ImageView locationThumbnail;
+        TextView locationTitle;
+        TextView locationUploadDate;
+        RatingBar locationScore;
 
         public IMyViewHolderClicks mListener;
 
-        public ViewHolderBoxOffice(View itemView, IMyViewHolderClicks listener) {
+        public ViewHolderLocation(View itemView, IMyViewHolderClicks listener) {
             super(itemView);
-            movieThumbnail = (ImageView) itemView.findViewById(R.id.movieThumbnail);
-            movieTitle = (TextView) itemView.findViewById(R.id.movieTitle);
-            movieReleaseDate = (TextView) itemView.findViewById(R.id.movieReleaseDate);
-            movieAudienceScore = (RatingBar) itemView.findViewById(R.id.movieAudienceScore);
+            locationThumbnail = (ImageView) itemView.findViewById(R.id.locationThumbnail);
+            locationTitle = (TextView) itemView.findViewById(R.id.locationTitle);
+            locationUploadDate = (TextView) itemView.findViewById(R.id.locationUploadDate);
+            locationScore = (RatingBar) itemView.findViewById(R.id.locationScore);
             mListener = listener;
 
             itemView.setOnClickListener(this);

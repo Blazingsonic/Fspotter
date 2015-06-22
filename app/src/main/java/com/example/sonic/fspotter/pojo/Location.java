@@ -11,16 +11,16 @@ import java.util.Date;
 /**
  * Created by Windows on 09-02-2015.
  */
-public class Movie implements Parcelable {
-    public static final Parcelable.Creator<Movie> CREATOR
-            = new Parcelable.Creator<Movie>() {
-        public Movie createFromParcel(Parcel in) {
-            L.m("create from parcel :Movie");
-            return new Movie(in);
+public class Location implements Parcelable {
+    public static final Parcelable.Creator<Location> CREATOR
+            = new Parcelable.Creator<Location>() {
+        public Location createFromParcel(Parcel in) {
+            L.m("create from parcel :Location");
+            return new Location(in);
         }
 
-        public Movie[] newArray(int size) {
-            return new Movie[size];
+        public Location[] newArray(int size) {
+            return new Location[size];
         }
     };
     private long id;
@@ -34,11 +34,11 @@ public class Movie implements Parcelable {
     private String urlReviews;
     private String urlSimilar;
 
-    public Movie() {
+    public Location() {
 
     }
 
-    public Movie(Parcel input) {
+    public Location(Parcel input) {
         id = input.readLong();
         title = input.readString();
         long dateMillis=input.readLong();
@@ -52,16 +52,16 @@ public class Movie implements Parcelable {
         urlSimilar = input.readString();
     }
 
-    public Movie(long id,
-                 String title,
-                 Date releaseDateTheater,
-                 int audienceScore,
-                 String synopsis,
-                 String urlThumbnail,
-                 String urlSelf,
-                 String urlCast,
-                 String urlReviews,
-                 String urlSimilar) {
+    public Location(long id,
+                    String title,
+                    Date releaseDateTheater,
+                    int audienceScore,
+                    String synopsis,
+                    String urlThumbnail,
+                    String urlSelf,
+                    String urlCast,
+                    String urlReviews,
+                    String urlSimilar) {
         this.id = id;
         this.title = title;
         this.releaseDateTheater = releaseDateTheater;
@@ -171,13 +171,13 @@ public class Movie implements Parcelable {
 
     @Override
     public int describeContents() {
-//        L.m("describe Contents Movie");
+//        L.m("describe Contents Location");
         return 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-//        L.m("writeToParcel Movie");
+//        L.m("writeToParcel Location");
         dest.writeLong(id);
         dest.writeString(title);
         dest.writeLong(releaseDateTheater == null ? -1 : releaseDateTheater.getTime());

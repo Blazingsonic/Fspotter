@@ -1,6 +1,5 @@
 package com.example.sonic.fspotter.activities;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,10 +17,8 @@ import android.widget.ImageView;
 
 import com.example.sonic.fspotter.R;
 import com.example.sonic.fspotter.anim.AnimationUtils;
-import com.example.sonic.fspotter.extras.GifDataDownloader;
-import com.example.sonic.fspotter.extras.GifWebView;
 import com.example.sonic.fspotter.extras.SortListener;
-import com.example.sonic.fspotter.fragments.FragmentBoxOffice;
+import com.example.sonic.fspotter.fragments.FragmentLocations;
 import com.example.sonic.fspotter.fragments.FragmentDrawer;
 import com.example.sonic.fspotter.fragments.FragmentUpcoming;
 import com.example.sonic.fspotter.fragments.FragmentMap;
@@ -32,9 +28,6 @@ import com.felipecsl.gifimageview.library.GifImageView;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -271,7 +264,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
                     fragment = FragmentMap.newInstance("", "");
                     break;
                 case TAB_CREATE:
-                    fragment = FragmentBoxOffice.newInstance("", "");
+                    fragment = FragmentLocations.newInstance("", "");
                     break;
                 case TAB_LIST:
                     fragment = FragmentUpcoming.newInstance("", "");

@@ -1,6 +1,7 @@
 package com.example.sonic.fspotter.fragments;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,11 +12,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.sonic.fspotter.R;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -42,6 +56,7 @@ public class SettingsFragment extends Fragment {
 
     @InjectView(R.id.spinnerView) Spinner mSpinner;
     @InjectView(R.id.spinnerView2) Spinner mSpinner2;
+    @InjectView(R.id.testPostButton) Button mTestPostButton;
 
     public SettingsFragment() {
     }
@@ -85,6 +100,12 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+        mTestPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MyHttpPost().execute();
             }
         });
 
@@ -137,5 +158,43 @@ public class SettingsFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner2.setAdapter(adapter);
+    }
+
+    private class MyHttpPost extends AsyncTask<String, Void, Boolean> {
+
+
+        @Override
+        protected Boolean doInBackground(String... arg0) {
+
+            Log.v(TAG, "POOOOSSST");
+            HttpClient httpClient = new DefaultHttpClient();
+
+            HttpPost httpPost = new HttpPost("http://46.101.165.28/task_manager/v1/register");
+
+            List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
+            nameValuePair.add(new BasicNameValuePair("name", "testPost"));
+            nameValuePair.add(new BasicNameValuePair("email", "testEmail@web.de"));
+            nameValuePair.add(new BasicNameValuePair("password", "testPassword"));
+
+            //Encoding POST data
+            try {
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+            } catch (UnsupportedEncodingException e)
+
+            {
+                e.printStackTrace();
+            }
+
+            try {
+
+                HttpResponse response = httpClient.execute(httpPost);
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
     }
 }
