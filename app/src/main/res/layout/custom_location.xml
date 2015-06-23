@@ -28,7 +28,7 @@
         android:textSize="@dimen/size_text_primary" />
 
     <TextView
-        android:id="@+id/locationDescription"
+        android:id="@+id/locationMapIconId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -43,8 +43,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/locationDescription"
+        android:layout_below="@+id/locationMapIconId"
         android:isIndicator="true"
         android:max="5"
         android:numStars="0" />
+
+    <TextView
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:id="@+id/locationRatingBackground"
+        android:background="@drawable/textview_backround"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="94dp"
+        android:shadowColor="#000"
+        android:shadowDx="20"
+        android:shadowDy="20"
+        android:shadowRadius="50" />
+
+    <TextView
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:text="20"
+        android:id="@+id/locationRating"
+        android:layout_centerVertical="true"
+        android:ellipsize="middle"
+        android:background="@drawable/textview_design"
+        android:textSize="12sp"
+        android:layout_marginLeft="95dp"
+        android:textColor="#ddffffff"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:id="@+id/locationImage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/picture_ocean" />
+
 </RelativeLayout>

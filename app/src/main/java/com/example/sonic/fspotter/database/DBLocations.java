@@ -35,7 +35,7 @@ public class DBLocations {
 
 
         //create a sql prepared statement
-        String sql = "INSERT INTO " + (table == LOCATIONS ? LocationsHelper.TABLE_LOCATIONS : LocationsHelper.TABLE_UPCOMING) + " VALUES (?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO " + (table == LOCATIONS ? LocationsHelper.TABLE_LOCATIONS : LocationsHelper.TABLE_UPCOMING) + " VALUES (?,?,?,?,?,?,?,?,?);";
         //compile the statement and start a transaction
         SQLiteStatement statement = mDatabase.compileStatement(sql);
         mDatabase.beginTransaction();
@@ -43,12 +43,14 @@ public class DBLocations {
             Location currentLocation = listLocations.get(i);
             statement.clearBindings();
             //for a given column index, simply bind the data to be put inside that index
-            statement.bindString(2, currentLocation.getLocationName());
-            statement.bindString(3, currentLocation.getDescription());
-            statement.bindDouble(4, currentLocation.getLatitude());
-            statement.bindDouble(5, currentLocation.getLongitude());
-            statement.bindString(6, currentLocation.getHints());
-            statement.bindString(7, currentLocation.getMapIconId());
+            statement.bindLong(2, currentLocation.getId());
+            statement.bindString(3, currentLocation.getLocationName());
+            statement.bindString(4, currentLocation.getDescription());
+            statement.bindDouble(5, currentLocation.getLatitude());
+            statement.bindDouble(6, currentLocation.getLongitude());
+            statement.bindString(7, currentLocation.getHints());
+            statement.bindString(8, currentLocation.getMapIconId());
+            statement.bindLong(9, currentLocation.getRating());
 
             statement.execute();
         }
@@ -63,12 +65,14 @@ public class DBLocations {
 
         //get a list of columns to be retrieved, we need all of them
         String[] columns = {LocationsHelper.COLUMN_UID,
+                LocationsHelper.COLUMN_ID,
                 LocationsHelper.COLUMN_LOCATION_NAME,
                 LocationsHelper.COLUMN_DESCRIPTION,
                 LocationsHelper.COLUMN_LATITUDE,
                 LocationsHelper.COLUMN_LONGITUDE,
                 LocationsHelper.COLUMN_HINTS,
-                LocationsHelper.COLUMN_MAP_ICON_ID
+                LocationsHelper.COLUMN_MAP_ICON_ID,
+                LocationsHelper.COLUMN_RATING
         };
         Cursor cursor = mDatabase.query((table == LOCATIONS ? LocationsHelper.TABLE_LOCATIONS : LocationsHelper.TABLE_UPCOMING), columns, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
@@ -79,12 +83,14 @@ public class DBLocations {
                 Location location = new Location();
                 //each step is a 2 part process, find the index of the column first, find the data of that column using
                 //that index and finally set our blank location object to contain our data
+                location.setId(cursor.getLong(cursor.getColumnIndex(LocationsHelper.COLUMN_ID)));
                 location.setLocationName(cursor.getString(cursor.getColumnIndex(LocationsHelper.COLUMN_LOCATION_NAME)));
                 location.setDescription(cursor.getString(cursor.getColumnIndex(LocationsHelper.COLUMN_DESCRIPTION)));
                 location.setLatitude(cursor.getDouble(cursor.getColumnIndex(LocationsHelper.COLUMN_LATITUDE)));
                 location.setLongitude(cursor.getDouble(cursor.getColumnIndex(LocationsHelper.COLUMN_LONGITUDE)));
                 location.setHints(cursor.getString(cursor.getColumnIndex(LocationsHelper.COLUMN_HINTS)));
                 location.setMapIconId(cursor.getString(cursor.getColumnIndex(LocationsHelper.COLUMN_MAP_ICON_ID)));
+                location.setRating(cursor.getLong(cursor.getColumnIndex(LocationsHelper.COLUMN_RATING)));
 
                 //add the location to the list of location objects which we plan to return
                 listLocations.add(location);
@@ -102,30 +108,36 @@ public class DBLocations {
         public static final String TABLE_UPCOMING = " movies_upcoming";
         public static final String TABLE_LOCATIONS = "locations";
         public static final String COLUMN_UID = "_id";
+        public static final String COLUMN_ID = "id";
         public static final String COLUMN_LOCATION_NAME = "location_name";
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_LATITUDE = "latitude";
         public static final String COLUMN_LONGITUDE = "longitude";
         public static final String COLUMN_HINTS = "hints";
         public static final String COLUMN_MAP_ICON_ID = "map_icon_id";
+        public static final String COLUMN_RATING = "rating";
 
         private static final String CREATE_TABLE_LOCATIONS = "CREATE TABLE " + TABLE_LOCATIONS + " (" +
                 COLUMN_UID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_ID + " LONG," +
                 COLUMN_LOCATION_NAME + " TEXT," +
                 COLUMN_DESCRIPTION + " TEXT," +
                 COLUMN_LATITUDE + " DOUBLE," +
                 COLUMN_LONGITUDE + " DOUBLE," +
                 COLUMN_HINTS + " TEXT," +
-                COLUMN_MAP_ICON_ID + " TEXT" +
+                COLUMN_MAP_ICON_ID + " TEXT," +
+                COLUMN_RATING + " DOUBLE" +
                 ");";
         private static final String CREATE_TABLE_UPCOMING = "CREATE TABLE " + TABLE_UPCOMING + " (" +
                 COLUMN_UID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_ID + " LONG," +
                 COLUMN_LOCATION_NAME + " TEXT," +
                 COLUMN_DESCRIPTION + " TEXT," +
                 COLUMN_LATITUDE + " DOUBLE," +
                 COLUMN_LONGITUDE + " DOUBLE," +
                 COLUMN_HINTS + " TEXT," +
-                COLUMN_MAP_ICON_ID + " TEXT" +
+                COLUMN_MAP_ICON_ID + " TEXT," +
+                COLUMN_RATING + " DOUBLE" +
                 ");";
         private static final String DB_NAME = "locations_db";
         private static final int DB_VERSION = 1;

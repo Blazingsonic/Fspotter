@@ -38,12 +38,12 @@ public class LocationSorter {
             }
         });
     }
-    public void sortLocationsByRating(ArrayList<Location> movies){
-        Collections.sort(movies, new Comparator<Location>() {
+    public void sortLocationsByRating(ArrayList<Location> locations){
+        Collections.sort(locations, new Comparator<Location>() {
             @Override
             public int compare(Location lhs, Location rhs) {
-                double ratingLhs=lhs.getLatitude();
-                double ratingRhs=rhs.getLatitude();
+                double ratingLhs=lhs.getRating();
+                double ratingRhs=rhs.getRating();
                 if(ratingLhs<ratingRhs)
                 {
                     return 1;

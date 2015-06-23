@@ -4,11 +4,13 @@ import android.util.Log;
 
 import com.example.sonic.fspotter.extras.Constants;
 import com.example.sonic.fspotter.pojo.Location;
+import com.example.sonic.fspotter.pojo.Rating;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,6 +45,7 @@ public class Parser {
                     double longitude = 80;
                     String hints = Constants.NA;
                     String mapIconId = Constants.NA;
+                    long rating = -1;
 
                     JSONObject currentMovie = arrayLocations.getJSONObject(i);
                     Log.v("JSON CURRENT", currentMovie.toString());
@@ -96,6 +99,7 @@ public class Parser {
                     location.setLongitude(longitude);
                     location.setHints(hints);
                     location.setMapIconId(mapIconId);
+                    location.setRating(rating);
 //                    L.t(getActivity(), location + "");
                     //if (id != -1 && !title.equals(Constants.NA)) {
                     listLocations.add(location);
@@ -111,5 +115,54 @@ public class Parser {
         return listLocations;
     }
 
+    public static ArrayList parseRatingsJSON(JSONObject response) {
+        ArrayList<Rating> listRatings = new ArrayList<>();
+        if (response != null && response.length() > 0) {
+            try {
+                JSONArray arrayRatings = response.getJSONArray("ratings");
+                Log.v("JSON TASKS RATINGS", arrayRatings.toString());
+                for (int i = 0; i < arrayRatings.length(); i++) {
+                    long id = -1;
+                    String locationName = Constants.NA;
+                    long rating = -1;
+
+                    JSONObject currentRating = arrayRatings.getJSONObject(i);
+                    Log.v("JSON CURRENT RATINGS", currentRating.toString());
+
+                    //Log.v("JSON CURRENT TASK", currentMovie.getString("task"));
+                    //get the id of the current location
+                    if (Utils.contains(currentRating, KEY_ID)) {
+                        id = currentRating.getLong(KEY_ID);
+                    }
+                    //get the title of the current location
+                    if (Utils.contains(currentRating, KEY_LOCATION_NAME)) {
+                        Log.v("JSON LOCATIONNAME", currentRating.getString("locationName"));
+                        locationName = currentRating.getString(KEY_LOCATION_NAME);
+                    }
+
+                    //get the date in theaters for the current location
+                    if (Utils.contains(currentRating, "rating")) {
+                        rating = currentRating.getInt("rating");
+
+                    }
+
+                    Rating ratingObject = new Rating();
+                    ratingObject.setId(id);
+                    ratingObject.setLocationName(locationName);
+                    ratingObject.setRating(rating);
+
+                    Log.v("JSON LOCATIONNAME", ratingObject.toString());
+
+                    listRatings.add(ratingObject);
+                }
+
+            } catch (JSONException e) {
+
+            }
+//                L.t(getActivity(), listLocations.size() + " rows fetched");
+        }
+        Log.v("LIST LOCATIONS", listRatings.toString());
+        return listRatings;
+    }
 
 }

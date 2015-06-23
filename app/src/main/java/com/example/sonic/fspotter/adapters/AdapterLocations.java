@@ -2,6 +2,7 @@ package com.example.sonic.fspotter.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,13 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
             public void onPotato(View caller, int position) {
                 // Start new intent
                 Intent intent = new Intent(mContext, ActivityDetail.class);
-                intent.putExtra("Name", mListLocations.get(position).getLocationName());
+                intent.putExtra("id", String.valueOf(mListLocations.get(position).getId()));
+                intent.putExtra("locationName", mListLocations.get(position).getLocationName());
+                intent.putExtra("description", mListLocations.get(position).getDescription());
+                intent.putExtra("hints", mListLocations.get(position).getHints());
+                intent.putExtra("latitude", String.valueOf(mListLocations.get(position).getLatitude()));
+                intent.putExtra("longitude", String.valueOf(mListLocations.get(position).getLongitude()));
+                intent.putExtra("mapIconId", mListLocations.get(position).getMapIconId());
                 mContext.startActivity(intent);
             }
         });
@@ -74,7 +81,8 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
         Location currentLocation = mListLocations.get(position);
         //one or more fields of the Location object may be null since they are fetched from the web
         holder.locationTitle.setText(currentLocation.getLocationName());
-        holder.locationDescription.setText(currentLocation.getDescription());
+        holder.locationMapIconId.setText(currentLocation.getMapIconId());
+        holder.locationRating.setText(String.valueOf(currentLocation.getRating()));
 
         if (position > mPreviousPosition) {
             AnimationUtils.animateSunblind(holder, true);
@@ -120,8 +128,10 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
 
         ImageView locationThumbnail;
         TextView locationTitle;
-        TextView locationDescription;
+        TextView locationMapIconId;
         RatingBar locationScore;
+        TextView locationRatingBackground;
+        TextView locationRating;
 
         public IMyViewHolderClicks mListener;
 
@@ -129,9 +139,15 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
             super(itemView);
             locationThumbnail = (ImageView) itemView.findViewById(R.id.locationThumbnail);
             locationTitle = (TextView) itemView.findViewById(R.id.locationTitle);
-            locationDescription = (TextView) itemView.findViewById(R.id.locationDescription);
+            locationMapIconId = (TextView) itemView.findViewById(R.id.locationMapIconId);
             locationScore = (RatingBar) itemView.findViewById(R.id.locationScore);
+            locationRating = (TextView) itemView.findViewById(R.id.locationRating);
+            locationRatingBackground = (TextView) itemView.findViewById(R.id.locationRatingBackground);
             mListener = listener;
+
+            //locationRatingBackground.setShadowLayer(30, 0, 0, Color.BLACK);
+            locationRatingBackground.bringToFront();
+            locationRating.bringToFront();
 
             itemView.setOnClickListener(this);
         }

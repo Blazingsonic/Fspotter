@@ -9,6 +9,7 @@ import com.example.sonic.fspotter.json.Parser;
 import com.example.sonic.fspotter.json.Requestor;
 import com.example.sonic.fspotter.fspotter.MyApplication;
 import com.example.sonic.fspotter.pojo.Location;
+import com.example.sonic.fspotter.pojo.Rating;
 
 import org.json.JSONObject;
 
@@ -25,8 +26,22 @@ public class LocationUtils {
             Log.v("JSON RESPONSE", response.toString());
         }
         ArrayList<Location> listLocations = Parser.parseLocationsJSON(response);
-        MyApplication.getWritableDatabase().insertLocations(DBLocations.LOCATIONS, listLocations, true);
-        return listLocations;
+
+        JSONObject responseRatings = Requestor.requestLocationsJSON(requestQueue, Endpoints.getRequestUrlRatings(30));
+        if (responseRatings != null) {
+            Log.v("JSON RESPONSE RATINGS", responseRatings.toString());
+        }
+        ArrayList<Rating> listRatings = Parser.parseRatingsJSON(responseRatings);
+
+        // Average the ratings
+        ArrayList<Rating> averagedRatings = RatingAverager.averageRatings(listRatings);
+
+        // Add ratings to locations
+        ArrayList<Location> updatedLocations = Comparator.updateLocationsWithRatings(listLocations, averagedRatings);
+
+        Log.v("UPDATED LOCATIONS", updatedLocations.toString());
+        MyApplication.getWritableDatabase().insertLocations(DBLocations.LOCATIONS, updatedLocations, true);
+        return updatedLocations;
     }
 
     public static ArrayList<Location> loadUpcomingMovies(RequestQueue requestQueue) {

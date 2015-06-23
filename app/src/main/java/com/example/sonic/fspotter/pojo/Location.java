@@ -30,6 +30,7 @@ public class Location implements Parcelable {
     private double longitude;
     private String hints;
     private String mapIconId;
+    private long rating;
 
     public Location() {
 
@@ -43,6 +44,7 @@ public class Location implements Parcelable {
         longitude = input.readDouble();
         hints = input.readString();
         mapIconId = input.readString();
+        rating = input.readInt();
 
     }
 
@@ -52,14 +54,16 @@ public class Location implements Parcelable {
                     double latitude,
                     double longitude,
                     String hints,
-                    String mapIconId) {
-        this.id = id;
-        this.locationName = locationName;
-        this.description = description;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.hints = hints;
-        this.mapIconId = mapIconId;
+                    String mapIconId,
+                    int rating) {
+            this.id = id;
+            this.locationName = locationName;
+            this.description = description;
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.hints = hints;
+            this.mapIconId = mapIconId;
+            this.rating = rating;
 
     }
 
@@ -119,6 +123,13 @@ public class Location implements Parcelable {
         this.mapIconId = mapIconId;
     }
 
+    public long getRating() {
+        return rating;
+    }
+
+    public void setRating(long rating) {
+        this.rating = rating;
+    }
 
     @Override
     public String toString() {
@@ -129,6 +140,7 @@ public class Location implements Parcelable {
                 "\nScore " + latitude +
                 "\nhints " + hints +
                 "\nmapIconId " + mapIconId +
+                "\nrating " + rating +
                 "\n";
     }
 
@@ -148,6 +160,7 @@ public class Location implements Parcelable {
         dest.writeDouble(longitude);
         dest.writeString(hints);
         dest.writeString(mapIconId);
+        dest.writeLong(rating);
 
     }
 }
