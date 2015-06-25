@@ -2,8 +2,11 @@ package com.example.sonic.fspotter.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +73,7 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
                 intent.putExtra("latitude", String.valueOf(mListLocations.get(position).getLatitude()));
                 intent.putExtra("longitude", String.valueOf(mListLocations.get(position).getLongitude()));
                 intent.putExtra("mapIconId", mListLocations.get(position).getMapIconId());
+                intent.putExtra("rating", String.valueOf(mListLocations.get(position).getRating()));
                 mContext.startActivity(intent);
             }
         });
@@ -83,6 +87,10 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
         holder.locationTitle.setText(currentLocation.getLocationName());
         holder.locationMapIconId.setText(currentLocation.getMapIconId());
         holder.locationRating.setText(String.valueOf(currentLocation.getRating()));
+
+        // encode string to bitmap
+        Bitmap bitmap = stringToBitMap(currentLocation.getImage());
+        holder.locationImage.setImageBitmap(bitmap);
 
         if (position > mPreviousPosition) {
             AnimationUtils.animateSunblind(holder, true);
@@ -119,6 +127,21 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
         }
     }
 
+    /**
+     * @param encodedString
+     * @return bitmap (from given string)
+     */
+    public Bitmap stringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
     @Override
     public int getItemCount() {
         return mListLocations.size();
@@ -132,6 +155,7 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
         RatingBar locationScore;
         TextView locationRatingBackground;
         TextView locationRating;
+        ImageView locationImage;
 
         public IMyViewHolderClicks mListener;
 
@@ -143,6 +167,7 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
             locationScore = (RatingBar) itemView.findViewById(R.id.locationScore);
             locationRating = (TextView) itemView.findViewById(R.id.locationRating);
             locationRatingBackground = (TextView) itemView.findViewById(R.id.locationRatingBackground);
+            locationImage = (ImageView) itemView.findViewById(R.id.locationImage);
             mListener = listener;
 
             //locationRatingBackground.setShadowLayer(30, 0, 0, Color.BLACK);

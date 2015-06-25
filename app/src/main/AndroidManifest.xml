@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sonic.fspotter" >
 
+    <permission
+        android:name="com.example.sonic.fspotter.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Always required on api < 21, needed to keep a wake lock while your job is running -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -9,6 +13,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- Required on all api levels if you are using setPersisted(true) -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.example.sonic.fspotter.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
         android:name=".fspotter.MyApplication"
@@ -19,7 +28,6 @@
         <activity
             android:name=".activities.ActivityMain"
             android:label="@string/title_activity_main" >
-
         </activity>
 
         <meta-data
@@ -41,6 +49,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ActivityMap"
+            android:label="@string/title_activity_activity_map"
+            android:parentActivityName="com.example.sonic.fspotter.activities.ActivityMain" >
         </activity>
     </application>
 

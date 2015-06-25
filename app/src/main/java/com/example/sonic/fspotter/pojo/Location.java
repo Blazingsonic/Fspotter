@@ -31,6 +31,8 @@ public class Location implements Parcelable {
     private String hints;
     private String mapIconId;
     private long rating;
+    private String image;
+
 
     public Location() {
 
@@ -45,6 +47,7 @@ public class Location implements Parcelable {
         hints = input.readString();
         mapIconId = input.readString();
         rating = input.readInt();
+        image = input.readString();
 
     }
 
@@ -55,7 +58,8 @@ public class Location implements Parcelable {
                     double longitude,
                     String hints,
                     String mapIconId,
-                    int rating) {
+                    int rating,
+                    String image) {
             this.id = id;
             this.locationName = locationName;
             this.description = description;
@@ -64,6 +68,7 @@ public class Location implements Parcelable {
             this.hints = hints;
             this.mapIconId = mapIconId;
             this.rating = rating;
+            this.image = image;
 
     }
 
@@ -131,6 +136,14 @@ public class Location implements Parcelable {
         this.rating = rating;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "\nID: " + id +
@@ -141,6 +154,7 @@ public class Location implements Parcelable {
                 "\nhints " + hints +
                 "\nmapIconId " + mapIconId +
                 "\nrating " + rating +
+                "\nimage " + image +
                 "\n";
     }
 
@@ -161,6 +175,7 @@ public class Location implements Parcelable {
         dest.writeString(hints);
         dest.writeString(mapIconId);
         dest.writeLong(rating);
+        dest.writeString(image);
 
     }
 }

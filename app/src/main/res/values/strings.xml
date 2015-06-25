@@ -15,10 +15,11 @@
 
     <string name="stern_prompt">Choose a ranking</string>
     <string-array name="map_icon_array">
-        <item>Kategorie auswählen</item>
-        <item>Natur</item>
-        <item>Architektur</item>
-        <item>Leben</item>
+        <item>Baum</item>
+        <item>Berg</item>
+        <item>Kirche</item>
+        <item>Leuchtturm</item>
+        <item>Wasserfall</item>
         <item>Sonstiges</item>
     </string-array>
 
@@ -56,5 +57,7 @@
     <string name="action_shared_transitions">SharedElementsTransition</string>
     <string name="title_activity_detail"></string>
     <string name="title_activity_acivity_splash_screen">AcivitySplashScreen</string>
+    <string name="title_activity_activity_detail_map">ActivityDetailMap</string>
+    <string name="title_activity_activity_map">ActivityMap</string>
 
 </resources>

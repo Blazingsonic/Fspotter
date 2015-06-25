@@ -19,6 +19,7 @@ import java.util.Date;
 
 import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_HINTS;
 import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_ID;
+import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_IMAGE;
 import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_LOCATIONS;
 import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_LOCATION_NAME;
 import static com.example.sonic.fspotter.extras.Keys.EndpointLocations.KEY_MAP_ICON_ID;
@@ -46,6 +47,7 @@ public class Parser {
                     String hints = Constants.NA;
                     String mapIconId = Constants.NA;
                     long rating = -1;
+                    String image = Constants.NA;
 
                     JSONObject currentMovie = arrayLocations.getJSONObject(i);
                     Log.v("JSON CURRENT", currentMovie.toString());
@@ -85,6 +87,11 @@ public class Parser {
                         mapIconId = currentMovie.getString(KEY_MAP_ICON_ID);
                     }
 
+                    //get the url for the thumbnail to be displayed inside the current location result
+                    if (Utils.contains(currentMovie, KEY_IMAGE)) {
+                        image = currentMovie.getString(KEY_IMAGE);
+                    }
+
                     Location location = new Location();
                     location.setId(id);
                     location.setLocationName(locationName);
@@ -100,6 +107,7 @@ public class Parser {
                     location.setHints(hints);
                     location.setMapIconId(mapIconId);
                     location.setRating(rating);
+                    location.setImage(image);
 //                    L.t(getActivity(), location + "");
                     //if (id != -1 && !title.equals(Constants.NA)) {
                     listLocations.add(location);

@@ -13,6 +13,7 @@ public interface Keys {
         public static final String KEY_LONGITUDE = "longitude";
         public static final String KEY_HINTS = "hints";
         public static final String KEY_MAP_ICON_ID = "mapIconId";
+        public static final String KEY_IMAGE = "image";
 
     }
 }

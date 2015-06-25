@@ -35,7 +35,7 @@ public class DBLocations {
 
 
         //create a sql prepared statement
-        String sql = "INSERT INTO " + (table == LOCATIONS ? LocationsHelper.TABLE_LOCATIONS : LocationsHelper.TABLE_UPCOMING) + " VALUES (?,?,?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO " + (table == LOCATIONS ? LocationsHelper.TABLE_LOCATIONS : LocationsHelper.TABLE_UPCOMING) + " VALUES (?,?,?,?,?,?,?,?,?,?);";
         //compile the statement and start a transaction
         SQLiteStatement statement = mDatabase.compileStatement(sql);
         mDatabase.beginTransaction();
@@ -51,6 +51,7 @@ public class DBLocations {
             statement.bindString(7, currentLocation.getHints());
             statement.bindString(8, currentLocation.getMapIconId());
             statement.bindLong(9, currentLocation.getRating());
+            statement.bindString(10, currentLocation.getImage());
 
             statement.execute();
         }
@@ -72,7 +73,8 @@ public class DBLocations {
                 LocationsHelper.COLUMN_LONGITUDE,
                 LocationsHelper.COLUMN_HINTS,
                 LocationsHelper.COLUMN_MAP_ICON_ID,
-                LocationsHelper.COLUMN_RATING
+                LocationsHelper.COLUMN_RATING,
+                LocationsHelper.COLUMN_IMAGE
         };
         Cursor cursor = mDatabase.query((table == LOCATIONS ? LocationsHelper.TABLE_LOCATIONS : LocationsHelper.TABLE_UPCOMING), columns, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
@@ -91,6 +93,7 @@ public class DBLocations {
                 location.setHints(cursor.getString(cursor.getColumnIndex(LocationsHelper.COLUMN_HINTS)));
                 location.setMapIconId(cursor.getString(cursor.getColumnIndex(LocationsHelper.COLUMN_MAP_ICON_ID)));
                 location.setRating(cursor.getLong(cursor.getColumnIndex(LocationsHelper.COLUMN_RATING)));
+                location.setImage(cursor.getString(cursor.getColumnIndex(LocationsHelper.COLUMN_IMAGE)));
 
                 //add the location to the list of location objects which we plan to return
                 listLocations.add(location);
@@ -116,6 +119,7 @@ public class DBLocations {
         public static final String COLUMN_HINTS = "hints";
         public static final String COLUMN_MAP_ICON_ID = "map_icon_id";
         public static final String COLUMN_RATING = "rating";
+        public static final String COLUMN_IMAGE = "image";
 
         private static final String CREATE_TABLE_LOCATIONS = "CREATE TABLE " + TABLE_LOCATIONS + " (" +
                 COLUMN_UID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -126,7 +130,8 @@ public class DBLocations {
                 COLUMN_LONGITUDE + " DOUBLE," +
                 COLUMN_HINTS + " TEXT," +
                 COLUMN_MAP_ICON_ID + " TEXT," +
-                COLUMN_RATING + " DOUBLE" +
+                COLUMN_RATING + " DOUBLE," +
+                COLUMN_IMAGE + " String" +
                 ");";
         private static final String CREATE_TABLE_UPCOMING = "CREATE TABLE " + TABLE_UPCOMING + " (" +
                 COLUMN_UID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -137,7 +142,8 @@ public class DBLocations {
                 COLUMN_LONGITUDE + " DOUBLE," +
                 COLUMN_HINTS + " TEXT," +
                 COLUMN_MAP_ICON_ID + " TEXT," +
-                COLUMN_RATING + " DOUBLE" +
+                COLUMN_RATING + " DOUBLE," +
+                COLUMN_IMAGE + " String" +
                 ");";
         private static final String DB_NAME = "locations_db";
         private static final int DB_VERSION = 1;
