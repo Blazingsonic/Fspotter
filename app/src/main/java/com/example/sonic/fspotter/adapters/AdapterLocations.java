@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +18,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.sonic.fspotter.R;
 import com.example.sonic.fspotter.activities.ActivityDetail;
+import com.example.sonic.fspotter.activities.ActivityMain;
 import com.example.sonic.fspotter.anim.AnimationUtils;
+import com.example.sonic.fspotter.database.DBLocations;
 import com.example.sonic.fspotter.extras.Constants;
+import com.example.sonic.fspotter.fragments.FragmentLocations;
+import com.example.sonic.fspotter.fspotter.MyApplication;
 import com.example.sonic.fspotter.network.VolleySingleton;
 import com.example.sonic.fspotter.pojo.Location;
+import com.example.sonic.fspotter.pojo.Rating;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -74,6 +80,14 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
                 intent.putExtra("longitude", String.valueOf(mListLocations.get(position).getLongitude()));
                 intent.putExtra("mapIconId", mListLocations.get(position).getMapIconId());
                 intent.putExtra("rating", String.valueOf(mListLocations.get(position).getRating()));
+
+                /*if (!mListLocations.get(position).getImage().equals("NA")) {
+                    //Log.v("EMPTY IMAGE", mListLocations.get(position).getImage());
+                    Bitmap bitmap = stringToBitMap(mListLocations.get(position).getImage());
+                    Bitmap bitmapScaledDown = scaleDownBitmap(bitmap, 80, mContext);
+                    String imageString = BitMapToString(bitmapScaledDown);
+                    intent.putExtra("image", imageString);
+                }*/
                 mContext.startActivity(intent);
             }
         });
@@ -142,6 +156,26 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
         }
     }
 
+    /*public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }*/
+
+    /*public static Bitmap scaleDownBitmap(Bitmap photo, int newHeight, Context context) {
+
+        final float densityMultiplier = context.getResources().getDisplayMetrics().density;
+
+        int height= (int) (newHeight*densityMultiplier);
+        int width= (int) (height * photo.getWidth()/((double) photo.getHeight()));
+
+        photo=Bitmap.createScaledBitmap(photo, width, height, true);
+
+        return photo;
+    }*/
+
     @Override
     public int getItemCount() {
         return mListLocations.size();
@@ -162,7 +196,7 @@ public class AdapterLocations extends RecyclerView.Adapter<AdapterLocations.View
         public ViewHolderLocation(View itemView, IMyViewHolderClicks listener) {
             super(itemView);
             locationThumbnail = (ImageView) itemView.findViewById(R.id.locationThumbnail);
-            locationTitle = (TextView) itemView.findViewById(R.id.locationTitle);
+            locationTitle = (TextView) itemView.findViewById(R.id.locationComment);
             locationMapIconId = (TextView) itemView.findViewById(R.id.locationMapIconId);
             locationScore = (RatingBar) itemView.findViewById(R.id.locationScore);
             locationRating = (TextView) itemView.findViewById(R.id.locationRating);

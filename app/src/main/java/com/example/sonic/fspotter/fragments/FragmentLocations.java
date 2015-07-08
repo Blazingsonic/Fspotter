@@ -5,9 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -45,6 +49,8 @@ public class FragmentLocations extends Fragment implements SortListener, Locatio
     //the adapter responsible for displaying our movies within a RecyclerView
     private AdapterLocations mAdapter;
 
+    private Spinner mSpinnerView;
+    private ImageView mFilterImageView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     //the recyclerview containing showing all our movies
     private RecyclerView mRecyclerLocations;
@@ -83,6 +89,9 @@ public class FragmentLocations extends Fragment implements SortListener, Locatio
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_locations, container, false);
+        mSpinnerView = (Spinner) layout.findViewById(R.id.spinnerView);
+        mFilterImageView = (ImageView) layout.findViewById(R.id.filterImage);
+        mFilterImageView.bringToFront();
         mTextError = (TextView) layout.findViewById(R.id.textVolleyError);
         mSwipeRefreshLayout = (SwipeRefreshLayout) layout.findViewById(R.id.swipeLocations);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -106,6 +115,48 @@ public class FragmentLocations extends Fragment implements SortListener, Locatio
         }
         //update your Adapter to containg the retrieved movies
         mAdapter.setLocations(mListLocations);
+
+        mSpinnerView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ArrayList<Location> filteredLocations;
+                if (mSpinnerView.getSelectedItem().toString().equals("All")) {
+                    filteredLocations= MyApplication.getWritableDatabase().readLocations(DBLocations.LOCATIONS);
+                    mListLocations = filteredLocations;
+                    mAdapter.setLocations(mListLocations);
+                } else if (mSpinnerView.getSelectedItem().toString().equals("Baum")) {
+                    Log.v("FILTER", "yep");
+                    filteredLocations= MyApplication.getWritableDatabase().getFilteredLocations(DBLocations.LOCATIONS, "Baum");
+                    mListLocations = filteredLocations;
+                    mAdapter.setLocations(mListLocations);
+                } else if (mSpinnerView.getSelectedItem().toString().equals("Berg")) {
+                    filteredLocations= MyApplication.getWritableDatabase().getFilteredLocations(DBLocations.LOCATIONS, "Berg");
+                    mListLocations = filteredLocations;
+                    mAdapter.setLocations(mListLocations);
+                } else if (mSpinnerView.getSelectedItem().toString().equals("Kirche")) {
+                    filteredLocations= MyApplication.getWritableDatabase().getFilteredLocations(DBLocations.LOCATIONS, "Kirche");
+                    mListLocations = filteredLocations;
+                    mAdapter.setLocations(mListLocations);
+                } else if (mSpinnerView.getSelectedItem().toString().equals("Leuchtturm")) {
+                    filteredLocations= MyApplication.getWritableDatabase().getFilteredLocations(DBLocations.LOCATIONS, "Leuchtturm");
+                    mListLocations = filteredLocations;
+                    mAdapter.setLocations(mListLocations);
+                } else if (mSpinnerView.getSelectedItem().toString().equals("Wasserfall")) {
+                    filteredLocations= MyApplication.getWritableDatabase().getFilteredLocations(DBLocations.LOCATIONS, "Wasserfall");
+                    mListLocations = filteredLocations;
+                    mAdapter.setLocations(mListLocations);
+                } else if (mSpinnerView.getSelectedItem().toString().equals("Sonstiges")) {
+                    filteredLocations= MyApplication.getWritableDatabase().getFilteredLocations(DBLocations.LOCATIONS, "Sonstiges");
+                    mListLocations = filteredLocations;
+                    mAdapter.setLocations(mListLocations);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         return layout;
     }
 
@@ -178,6 +229,8 @@ public class FragmentLocations extends Fragment implements SortListener, Locatio
         }
         mListLocations = listLocations; // diese Zeile habe ich zusätzlich eingefügt, um auch die direkt geladenen Locations sortierbar zu machen
         mAdapter.setLocations(listLocations);
+
+        mSpinnerView.setSelection(0);
     }
 
     @Override
@@ -185,6 +238,13 @@ public class FragmentLocations extends Fragment implements SortListener, Locatio
         L.t(getActivity(), "onRefresh");
         //load the whole feed again on refresh, dont try this at home :)
         new TaskLoadLocations(this).execute();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSpinnerView.setSelection(0);
+        mListLocations = MyApplication.getWritableDatabase().readLocations(DBLocations.LOCATIONS);
+        mAdapter.setLocations(mListLocations);
     }
 }

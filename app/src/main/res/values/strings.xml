@@ -23,6 +23,16 @@
         <item>Sonstiges</item>
     </string-array>
 
+    <string-array name="filter_array">
+        <item>All</item>
+        <item>Baum</item>
+        <item>Berg</item>
+        <item>Kirche</item>
+        <item>Leuchtturm</item>
+        <item>Wasserfall</item>
+        <item>Sonstiges</item>
+    </string-array>
+
     <string-array name="tabs">
         <item>TAB 1</item>
         <item>TAB 2</item>
@@ -59,5 +69,6 @@
     <string name="title_activity_acivity_splash_screen">AcivitySplashScreen</string>
     <string name="title_activity_activity_detail_map">ActivityDetailMap</string>
     <string name="title_activity_activity_map">ActivityMap</string>
+    <string name="title_activity_activity_set_marker">ActivitySetMarker</string>
 
 </resources>

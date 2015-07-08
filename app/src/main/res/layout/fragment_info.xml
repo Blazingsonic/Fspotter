@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+    </android.support.v4.view.ViewPager>
+
+    <TextView
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:id="@+id/locationRatingBackground"
+        android:background="@drawable/textview_backround"
+        android:layout_marginLeft="15dp"
+        android:shadowColor="#000"
+        android:shadowDx="20"
+        android:shadowDy="20"
+        android:shadowRadius="50"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:text="0"
+        android:id="@+id/locationRating"
+        android:ellipsize="middle"
+        android:background="@drawable/textview_design"
+        android:textSize="16sp"
+        android:layout_marginLeft="16dp"
+        android:textColor="#ddffffff"
+        android:gravity="center"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LocationName"
+        android:id="@+id/locationNameLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="150dp"
+        android:textSize="22sp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#ffffff"
+        android:maxWidth="335dp"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:id="@+id/locationIdLabel"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignBottom="@+id/locationNameLabel"
+        android:layout_toRightOf="@+id/locationNameLabel"
+        android:layout_marginLeft="5dp"
+        android:textColor="#ffffff"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category:"
+        android:id="@+id/categoryLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/locationNameLabel"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#99000000"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MapIconId"
+        android:id="@+id/locationMapIconId"
+        android:layout_alignBottom="@+id/categoryLabel"
+        android:layout_toRightOf="@+id/categoryLabel"
+        android:textSize="12sp"
+        android:layout_marginLeft="4dp"
+        android:textColor="#99ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latitude:"
+        android:id="@+id/latitudeLabel"
+        android:layout_toRightOf="@+id/locationMapIconId"
+        android:singleLine="false"
+        android:layout_alignBottom="@+id/categoryLabel"
+        android:textSize="12sp"
+        android:textColor="#99000000"
+        android:layout_marginLeft="9dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latitude"
+        android:id="@+id/locationLatitude"
+        android:layout_toRightOf="@+id/latitudeLabel"
+        android:layout_alignBottom="@+id/categoryLabel"
+        android:textSize="12sp"
+        android:layout_marginLeft="4dp"
+        android:textColor="#99ffffff"
+        android:maxWidth="50dp"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Longitude:"
+        android:id="@+id/longitudeLabel"
+        android:layout_alignBottom="@+id/categoryLabel"
+        android:layout_toRightOf="@+id/locationLatitude"
+        android:textSize="12sp"
+        android:textColor="#99000000"
+        android:layout_marginLeft="9dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Longitude"
+        android:id="@+id/locationLongitude"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/categoryLabel"
+        android:layout_toRightOf="@+id/longitudeLabel"
+        android:textSize="12sp"
+        android:layout_marginLeft="4dp"
+        android:textColor="#99ffffff"
+        android:maxWidth="45dp"
+        android:singleLine="true" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#000"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/categoryLabel"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:id="@+id/locationDescriptionLabel"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:layout_marginTop="31dp"
+        android:textColor="#000"
+        android:textIsSelectable="false"
+        android:layout_below="@+id/categoryLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:id="@+id/locationDescription"
+        android:layout_below="@+id/locationDescriptionLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hints"
+        android:id="@+id/locationHintsLabel"
+        android:layout_below="@+id/locationDescription"
+        android:textSize="15sp"
+        android:textColor="#000"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hints"
+        android:id="@+id/locationHints"
+        android:layout_below="@+id/locationHintsLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
+</RelativeLayout>

@@ -4,11 +4,41 @@
     android:layout_height="match_parent"
     tools:context="materialtest.vivz.slidenerd.fragments.MapFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/btn_find"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:text="Find"
+            android:layout_alignParentRight="true"
+            android:textSize="9sp"
+            android:layout_alignParentTop="false"
+            android:background="#fff"
+            android:layout_alignTop="@+id/et_location" />
+
+        <EditText
+            android:id="@+id/et_location"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="Location"
+            android:inputType="text"
+            android:background="#fff"
+            android:padding="7dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btn_find" />
+
+    </RelativeLayout>
+
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.gms.maps.MapView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp" />
 
 </FrameLayout>

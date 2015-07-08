@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rate the location!"
+        android:id="@+id/ratingHeadline"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:phoneNumber="false"
+        android:layout_alignParentTop="true"
+        android:textSize="16dp"
+        android:textColor="#f2d5d5d5" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/locationRatingInput"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="15dp"
+        android:hint="0 - 100"
+        android:layout_below="@+id/ratingHeadline"
+        android:background="#fff"
+        android:padding="7dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT"
+        android:id="@+id/submitRatingButton"
+        android:layout_below="@+id/locationRatingInput"
+        android:layout_marginTop="15dp"
+        android:background="#fff"
+        android:textColor="#000"
+        android:padding="2dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp" />
+
+    <TextView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:text="0"
+        android:id="@+id/locationRating"
+        android:ellipsize="middle"
+        android:background="@drawable/textview_design_detail"
+        android:textSize="30sp"
+        android:layout_marginLeft="104dp"
+        android:textColor="#ddffffff"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/submitRatingButton" />
+
+</RelativeLayout>

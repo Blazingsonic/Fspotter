@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#19518B">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a location"
+        android:id="@+id/settingsHeading"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="16sp"
+        android:textColor="#f2d5d5d5" />
+
+    <Spinner
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerView"
+        android:layout_below="@+id/settingsHeading"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:entries="@array/map_icon_array"
+        android:prompt="@string/stern_prompt"
+        android:layout_marginTop="15dp"
+        android:padding="7dp"
+        android:background="#fff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COORDINATES"
+        android:id="@+id/setCoordinatesButton"
+        android:layout_alignParentTop="false"
+        android:layout_toRightOf="@+id/spinnerView"
+        android:layout_alignParentRight="true"
+        android:textSize="14sp"
+        android:background="#fff"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/spinnerView"
+        android:layout_alignBottom="@+id/spinnerView" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationNameInput"
+        android:layout_below="@+id/spinnerView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Name des Spots"
+        android:layout_marginTop="5dp"
+        android:padding="7dp"
+        android:background="#fff"
+        android:textSize="12sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationDescriptionInput"
+        android:layout_below="@+id/locationNameInput"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Beschreibung"
+        android:layout_marginTop="5dp"
+        android:padding="7dp"
+        android:background="#fff"
+        android:textSize="12sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationHintsInput"
+        android:layout_below="@+id/locationDescriptionInput"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Hinweise"
+        android:layout_marginTop="5dp"
+        android:padding="7dp"
+        android:background="#fff"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="85dp"
+        android:id="@+id/imagePreview"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentRight="false"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/addPictureButton" />
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="85dp"
+        android:id="@+id/imagePreview2"
+        android:layout_alignBottom="@+id/imagePreview"
+        android:layout_toRightOf="@+id/imagePreview"
+        android:layout_marginLeft="5dp" />
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="85dp"
+        android:id="@+id/imagePreview3"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/imagePreview" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD PIC"
+        android:id="@+id/addPictureButton"
+        android:layout_below="@+id/locationHintsInput"
+        android:padding="7dp"
+        android:layout_marginTop="15dp"
+        android:background="#fff"
+        android:textSize="14sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gallery"
+        android:id="@+id/chooseFromGalleryButton"
+        android:layout_alignBottom="@+id/addPictureButton"
+        android:layout_marginLeft="128dp"
+        android:padding="7dp"
+        android:background="#fff"
+        android:textSize="14sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREATE"
+        android:id="@+id/postButton"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="15dp"
+        android:padding="7dp"
+        android:background="#fff"
+        android:textSize="14sp"
+        android:layout_alignBottom="@+id/chooseFromGalleryButton"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/setLatitudeView"
+        android:layout_below="@+id/addPictureButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/setLongitudeView"
+        android:layout_below="@+id/addPictureButton"
+        android:layout_toRightOf="@+id/setLatitudeView"
+        android:layout_toEndOf="@+id/setLatitudeView" />
+
+</RelativeLayout>

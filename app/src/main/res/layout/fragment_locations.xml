@@ -4,10 +4,30 @@
     android:layout_height="match_parent"
     tools:context="com.example.sonic.fspotter.fragments.FragmentLocations">
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorAccent"
+        android:entries="@array/filter_array"
+        android:prompt="@string/stern_prompt"
+        android:padding="7dp" />
+
+    <ImageView
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:id="@+id/filterImage"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="320dp"
+        android:src="@drawable/location_filter" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeLocations"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp">
         <!-- TODO: Update blank fragment layout -->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listLocations"

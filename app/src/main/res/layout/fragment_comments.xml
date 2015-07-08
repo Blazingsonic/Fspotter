@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Write or view comments"
+        android:id="@+id/commentHeadline"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:textColor="#f2d5d5d5"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/commentInput"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:hint="Write a new comment"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/commentHeadline"
+        android:layout_marginTop="15dp"
+        android:background="#fff"
+        android:padding="7dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/submitCommentButton"
+        android:layout_below="@+id/commentInput"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000"
+        android:background="#fff"
+        android:padding="2dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        android:paddingTop="20dp"
+        android:layout_marginTop="165dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listComments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/submitCommentButton"
+        android:layout_marginTop="25dp" />
+
+</RelativeLayout>

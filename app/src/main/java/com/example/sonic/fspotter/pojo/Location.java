@@ -32,7 +32,8 @@ public class Location implements Parcelable {
     private String mapIconId;
     private long rating;
     private String image;
-
+    private String comments;
+    private Date createdAt;
 
     public Location() {
 
@@ -48,6 +49,9 @@ public class Location implements Parcelable {
         mapIconId = input.readString();
         rating = input.readInt();
         image = input.readString();
+        comments = input.readString();
+        long dateMillis = input.readLong();
+        createdAt = (dateMillis == -1 ? null : new Date(dateMillis));
 
     }
 
@@ -59,7 +63,9 @@ public class Location implements Parcelable {
                     String hints,
                     String mapIconId,
                     int rating,
-                    String image) {
+                    String image,
+                    String comments,
+                    Date createdAt) {
             this.id = id;
             this.locationName = locationName;
             this.description = description;
@@ -69,6 +75,8 @@ public class Location implements Parcelable {
             this.mapIconId = mapIconId;
             this.rating = rating;
             this.image = image;
+            this.comments = comments;
+            this.createdAt = createdAt;
 
     }
 
@@ -144,6 +152,22 @@ public class Location implements Parcelable {
         this.image = image;
     }
 
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public String toString() {
         return "\nID: " + id +
@@ -155,6 +179,8 @@ public class Location implements Parcelable {
                 "\nmapIconId " + mapIconId +
                 "\nrating " + rating +
                 "\nimage " + image +
+                "\ncomments " + comments +
+                "\ncreatedAt " + createdAt +
                 "\n";
     }
 
@@ -176,6 +202,8 @@ public class Location implements Parcelable {
         dest.writeString(mapIconId);
         dest.writeLong(rating);
         dest.writeString(image);
+        dest.writeString(comments);
+        dest.writeLong(createdAt == null ? -1 : createdAt.getTime());
 
     }
 }

@@ -8,6 +8,8 @@ import com.example.sonic.fspotter.json.Endpoints;
 import com.example.sonic.fspotter.json.Parser;
 import com.example.sonic.fspotter.json.Requestor;
 import com.example.sonic.fspotter.fspotter.MyApplication;
+import com.example.sonic.fspotter.pojo.Comment;
+import com.example.sonic.fspotter.pojo.Image;
 import com.example.sonic.fspotter.pojo.Location;
 import com.example.sonic.fspotter.pojo.Rating;
 
@@ -21,27 +23,74 @@ import java.util.ArrayList;
  */
 public class LocationUtils {
     public static ArrayList<Location> loadLocations(RequestQueue requestQueue) {
+
+        /*
+         * GET locations, ratings, comments
+         */
+
+        // Get locations
         JSONObject response = Requestor.requestLocationsJSON(requestQueue, Endpoints.getRequestUrlLocations(30));
         if (response != null) {
             Log.v("JSON RESPONSE", response.toString());
         }
         ArrayList<Location> listLocations = Parser.parseLocationsJSON(response);
 
+        // Get ratings
         JSONObject responseRatings = Requestor.requestLocationsJSON(requestQueue, Endpoints.getRequestUrlRatings(30));
         if (responseRatings != null) {
             Log.v("JSON RESPONSE RATINGS", responseRatings.toString());
         }
         ArrayList<Rating> listRatings = Parser.parseRatingsJSON(responseRatings);
 
-        // Average the ratings
-        ArrayList<Rating> averagedRatings = RatingAverager.averageRatings(listRatings);
+        // Get comments
+        JSONObject responseComments = Requestor.requestLocationsJSON(requestQueue, Endpoints.getRequestUrlComments(30));
+        if (responseRatings != null) {
+            Log.v("JSON RESPONSE COMMENTS", responseComments.toString());
+        }
+        ArrayList<Comment> listComments = Parser.parseCommentsJSON(responseComments);
 
-        // Add ratings to locations
-        ArrayList<Location> updatedLocations = Comparator.updateLocationsWithRatings(listLocations, averagedRatings);
+        // Get images
+        JSONObject responseImages = Requestor.requestLocationsJSON(requestQueue, Endpoints.getRequestUrlImages(30));
+        if (responseRatings != null) {
+            Log.v("JSON RESPONSE COMMENTS", responseImages.toString());
+        }
+        ArrayList<Image> listImages = Parser.parseImagesJSON(responseImages);
 
-        Log.v("UPDATED LOCATIONS", updatedLocations.toString());
-        MyApplication.getWritableDatabase().insertLocations(DBLocations.LOCATIONS, updatedLocations, true);
-        return updatedLocations;
+        /*
+         * INSERT ratings, comments, locations
+         */
+
+        // Insert ratings
+        MyApplication.getWritableDatabase().insertRatings(DBLocations.LOCATIONS, listRatings, true);
+
+        // Select ratings and add them to locations
+        for (int i = 0; i < listLocations.size(); i++) {
+            Location currentLocation = listLocations.get(i);
+            ArrayList<Rating> ratingOfId;
+            ratingOfId = MyApplication.getWritableDatabase().getRatings(DBLocations.LOCATIONS, currentLocation.getId());
+            int sum = 0;
+            int average;
+            for (int j = 0; j < ratingOfId.size(); j++) {
+                sum += ratingOfId.get(j).getRating();
+                Log.v("RATING ID", String.valueOf(ratingOfId.get(j).getRating()));
+            }
+            if (sum != 0) {
+                average = sum / ratingOfId.size();
+                currentLocation.setRating(average);
+                Log.v("RATING AVERAGE", String.valueOf(average));
+            }
+        }
+
+        // Insert Comments
+        MyApplication.getWritableDatabase().insertComments(DBLocations.LOCATIONS, listComments, true);
+
+        // Insert Images
+        MyApplication.getWritableDatabase().insertImages(DBLocations.LOCATIONS, listImages, true);
+
+        // Insert Locations
+        MyApplication.getWritableDatabase().insertLocations(DBLocations.LOCATIONS, listLocations, true);
+
+        return listLocations;
     }
 
     public static ArrayList<Location> loadUpcomingMovies(RequestQueue requestQueue) {

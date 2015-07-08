@@ -1,5 +1,7 @@
 package com.example.sonic.fspotter.extras;
 
+import android.util.Log;
+
 import com.example.sonic.fspotter.pojo.Location;
 
 import java.util.ArrayList;
@@ -12,29 +14,30 @@ import java.util.Date;
  * Created by Windows on 18-02-2015.
  */
 public class LocationSorter {
-    public void sortLocationsByName(ArrayList<Location> movies){
-        Collections.sort(movies, new Comparator<Location>() {
+    public void sortLocationsByName(ArrayList<Location> locations){
+        Collections.sort(locations, new Comparator<Location>() {
             @Override
             public int compare(Location lhs, Location rhs) {
-                return lhs.getLocationName().compareTo(rhs.getLocationName());
+                return lhs.getLocationName().toLowerCase().compareTo(rhs.getLocationName().toLowerCase());
             }
         });
     }
-    public void sortLocationsByDate(ArrayList<Location> movies){
+    public void sortLocationsByDate(ArrayList<Location> locations){
 
-        Collections.sort(movies, new Comparator<Location>() {
+        Collections.sort(locations, new Comparator<Location>() {
             @Override
             public int compare(Location lhs, Location rhs) {
-                /*Date lhsDate=lhs.getDescription();
-                Date rhsDate=rhs.getDescription();
-                if(lhs.getDescription()!=null && rhs.getDescription()!=null)
+                Date lhsDate=lhs.getCreatedAt();
+                Date rhsDate=rhs.getCreatedAt();
+                Log.v("CREATED AT", rhsDate.toString());
+                Log.v("CREATED AT", lhsDate.toString());
+                if(lhs.getCreatedAt()!=null && rhs.getCreatedAt()!=null)
                 {
-                    return rhs.getDescription().compareTo(lhs.getDescription());
+                    return rhs.getCreatedAt().compareTo(lhs.getCreatedAt());
                 }
                 else {
                     return 0;
-                }*/
-                return 0;
+                }
             }
         });
     }

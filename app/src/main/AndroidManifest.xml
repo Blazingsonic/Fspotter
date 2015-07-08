@@ -53,7 +53,12 @@
         <activity
             android:name=".activities.ActivityMap"
             android:label="@string/title_activity_activity_map"
-            android:parentActivityName="com.example.sonic.fspotter.activities.ActivityMain" >
+            android:parentActivityName=".activities.ActivityMain" >
+        </activity>
+        <activity
+            android:name=".activities.ActivitySetMarker"
+            android:label="@string/title_activity_activity_set_marker"
+            android:parentActivityName=".activities.ActivityMain">
         </activity>
     </application>
 
